@@ -16,6 +16,7 @@ ADDED
 * GetRemoteContact
 * Polling tasks for different order types
 * Write pendingid to polling queue and check status of polling tasks
+* modules.xml: IT Domain Option fields extended
 
 FIXED
 
@@ -25,6 +26,7 @@ FIXED
 * Change user data
 * Write orderid to db table: domains data
 * Fix for update Status Delegated -> Trasfered bug
+* TransferDomain/TransferPollDomain
 
 TODO
 
