@@ -1,16 +1,17 @@
 <?php
 
-	/**
-	 * Ascio Registry Module for EPP-DRS
-	 *
-	 * API description: http://aws.ascio.info
-	 *
-	 * Github: https://github.com/justnx/eppdrs-module-ascio
-	 *
-	 */
+                /**
+                 * Ascio Registry Module for EPP-DRS
+                 *
+                 * API description: http://aws.ascio.info
+                 *
+                 * Github: https://github.com/justnx
+                 *
+                 */
 
 	class AscioRegistryModule extends AbstractRegistryModule implements IRegistryModuleClientPollable 
 	{
+
 		private $contact_type_prefix_map = array(
 			CONTACT_TYPE::ADMIN => 'contact',
 			CONTACT_TYPE::TECH => 'contact',
@@ -46,6 +47,7 @@
 			return array($prefix => $data);
 		}
 		
+		
 		/**
 		 * Called to validate either user filled all fields of your configuration form properly.
 		 * If you return true, all configuration data will be saved in database. If you return array, user will be presented with values of this array as errors. 
@@ -57,11 +59,11 @@
 		{
 			return true;
 		}
-	
-		/**
-		 * Must return a DataForm object that will be used to draw a configuration form for this module.
-		 * @return DataForm object
-		 */
+		
+	     /**
+	     * Must return a DataForm object that will be used to draw a configuration form for this module.
+	     * @return DataForm object
+	     */
 		public static function GetConfigurationForm()
 		{
 			$Form = new DataForm();
@@ -72,89 +74,70 @@
 			return $Form;
 		}
 
-		/**
-		 * Must return current Registrar ID (CLID). Generally, you can return registrar login here.
-		 * Used in transfer and some contact operations to determine either object belongs to current registrar.
-		 *
-		 * @return string
-		 */
-		public function GetRegistrarID()
-		{
-           		return $this->Config->GetFieldByName('Login')->Value;
-		}
+                /**
+                 * Must return current Registrar ID (CLID). Generally, you can return registrar login here.
+                 * Used in transfer and some contact operations to determine either object belongs to current registrar.
+                 *
+                 * @return string
+                 */
+                public function GetRegistrarID()
+                {
+                        return $this->Config->GetFieldByName('Login')->Value;
+                }
+	     /**
+	     * Update domain auth code.
+	     *
+	     * @param Domain $domain
+	     * @param string $authcode A list of changes in domain flags for the domain
+	     * @return UpdateDomainAuthCodeResponse
+	     */
+	    public function UpdateDomainAuthCode(Domain $domain, $authCode)
+	    {
 
-		/**
-		 * Update domain auth code.
-		 *
-		 * @param Domain $domain
-		 * @param string $authcode A list of changes in domain flags for the domain
-		 * @return UpdateDomainAuthCodeResponse
-		 */
-		public function UpdateDomainAuthCode(Domain $domain, $authCode)
-		{
-			$params = array( 'order' => array(
-				'Type' => 'Update_AuthInfo',
-				'Domain' => array(
-				'Comment' => 'EPP-DRS Update Authcode',
-				'DomainName' => $this->MakeNameIDNCompatible($domain->Name.'.'.$domain->Extension),
-	    			'AuthInfo' => $authCode
+	    	$params = array( 'order' => array(
+			'Type' => 'Update_AuthInfo',
+			'Domain' => array(
+			'Comment' => 'EPP-DRS Update Authcode',
+			'DomainName' => $this->MakeNameIDNCompatible($domain->Name.'.'.$domain->Extension),
+	    		'AuthInfo' => $authCode
 	    	)));
-	    		$Resp = $this->Request('CreateOrder', $params);
-			$status = $Resp->Succeed ? REGISTRY_RESPONSE_STATUS::SUCCESS : REGISTRY_RESPONSE_STATUS::FAILED;
+	    	$Resp = $this->Request('CreateOrder', $params);
+	    	
+			$status = $Resp->Succeed ? 
+				REGISTRY_RESPONSE_STATUS::SUCCESS : REGISTRY_RESPONSE_STATUS::FAILED;
 			return new UpdateDomainAuthCodeResponse($status, $Resp->ErrMsg, $Resp->Code); 
 
 		}
 		
 		/**
-		 * Called to check either domain can be transferred at this time.
-		 *
-		 * @param Domain $domain
-		 * @return DomainCanBeTransferredResponse
-		 */
-	    	public function DomainCanBeTransferred(Domain $domain)
+	     * Called to check either domain can be transferred at this time.
+	     *
+	     * @param Domain $domain
+	     * @return DomainCanBeTransferredResponse
+	     */
+	   public function DomainCanBeTransferred(Domain $domain)
 		{
-			$params = array(
-				'DomainName' => $this->MakeNameIDNCompatible($domain->Name.'.'.$domain->Extension),
-			);
-			$Resp = $this->Request('GetDomain', $params);
-			
-			$ok = $Resp->Data->DomainStatus instanceof SimpleXMLElement;
-			
-			$Ret = new DomainCanBeTransferredResponse(
-				$ok ? REGISTRY_RESPONSE_STATUS::SUCCESS : REGISTRY_RESPONSE_STATUS::FAILED,
-				$Resp->ErrMsg,
-				$Resp->Code
-			);
-			if ($ok)
-			{
-				$status = (string)$Resp->Data->DomainStatus->InAccount;
-				$Ret->Result =
-					// not in our database
-					$status == '0' ||
-					// in our database but in a different account than the one cited in this query 
-					$status == '2';
-			}
-			else
-			{
-				$Ret->Result = false;
-			}
-			return $Ret;
+		$Grd = $this->GetRemoteDomain($domain);
+    
+		$Ret = new DomainCanBeTransferredResponse(REGISTRY_RESPONSE_STATUS::SUCCESS);
+		$Ret->Result = !$Grd->Succeed();
+		return $Ret;
 		}
 
-		/**
-		 * Send domain trade (change of the owner) request.
-		 * This operation supports pending status. If you return response object with Status = REGISTRY_RESPONSE_STATUS.PENDING, you must return response later during a poll.  
-		 * 
-		 * @param Domain $domain Domain must have contacts and nameservers 
-		 * @param integer $period Domain delegation period
-		 * @param array $extra Some registry specific fields 
-		 * @return ChangeDomainOwnerResponse
-		 */
-		public function ChangeDomainOwner(Domain $domain, $period=null, $extra=array())
+	    /**
+	     * Send domain trade (change of the owner) request.
+	     * This operation supports pending status. If you return response object with Status = REGISTRY_RESPONSE_STATUS.PENDING, you must return response later during a poll.  
+	     * 
+	     * @param Domain $domain Domain must have contacts and nameservers 
+	     * @param integer $period Domain delegation period
+	     * @param array $extra Some registry specific fields 
+	     * @return ChangeDomainOwnerResponse
+	     */
+	    public function ChangeDomainOwner(Domain $domain, $period=null, $extra=array())
 		{
 			//throw new NotImplementedException();
 			// TODO: Testing and fixing
-			$params = array( 'order' => array(
+                        $params = array( 'order' => array(
                                  'Type' => 'Owner_Change',
                                  'Comments' => 'EPP-DRS ChangeDomainOwner Order',
                                  'Domain' => array(
@@ -183,27 +166,28 @@
 			return $Ret;
 		}
 
-		/**
-		 * Lock Domain
-		 *
-		 * @param Domain $domain
-		 * @param array $extra Some registry specific fields 
-		 * @return LockDomainResponse
-		 */
-		public function LockDomain(Domain $domain, $extra = array())
+	    
+	    /**
+	     * Lock Domain
+	     *
+	     * @param Domain $domain
+	     * @param array $extra Some registry specific fields 
+	     * @return LockDomainResponse
+	     */
+	    public function LockDomain(Domain $domain, $extra = array())
 		{
 			list($status, $errmsg, $code) = $this->SetDomainLock($domain, true);
 			return new LockDomainResponse($status, $errmsg, $code);
 		}
 	    
-		/**
-		 * Unlock Domain
-		 *
-		 * @param Domain $domain
-		 * @param array $extra Some extra data
-		 * @return UnLockDomainResponse
-		 */
-		public function UnlockDomain(Domain $domain, $extra = array())
+	    /**
+	     * Unlock Domain
+	     *
+	     * @param Domain $domain
+	     * @param array $extra Some extra data
+	     * @return UnLockDomainResponse
+	     */
+	    public function UnlockDomain(Domain $domain, $extra = array())
 		{
 			list($status, $errmsg, $code) = $this->SetDomainLock($domain, false);
 			return new UnLockDomainResponse($status, $errmsg, $code);
@@ -222,28 +206,30 @@
 			$Resp = $this->Request('CreateOrder', $params);
 			
 			// OK when operation executed or lock already exists
-			$status = $Resp->Succeed || $Resp->Code == 540 ?  REGISTRY_RESPONSE_STATUS::SUCCESS : REGISTRY_RESPONSE_STATUS::FAILED;
+			$status = $Resp->Succeed || $Resp->Code == 540 ? 
+				REGISTRY_RESPONSE_STATUS::SUCCESS : REGISTRY_RESPONSE_STATUS::FAILED;
 			return array($status, $Resp->ErrMsg, $Resp->Code);
+
 		}
 	    
-		/**
-		 * Update domain flags.
-		 * This operation supports pending status. If you return response object with Status = REGISTRY_RESPONSE_STATUS.PENDING, you must return response later during a poll.
-		 * See IRegistryModuleClientPollable::PollUpdateDomain().
-		 *
-		 * @param Domain $domain
-		 * @param IChangelist $changes A list of changes in domain flags for the domain
-		 * @return UpdateDomainFlagsResponse
-		 */
-		public function UpdateDomainFlags(Domain $domain, IChangelist $changes)
+	    /**
+	     * Update domain flags.
+	     * This operation supports pending status. If you return response object with Status = REGISTRY_RESPONSE_STATUS.PENDING, you must return response later during a poll.
+	     * See IRegistryModuleClientPollable::PollUpdateDomain().
+	     *
+	     * @param Domain $domain
+	     * @param IChangelist $changes A list of changes in domain flags for the domain
+	     * @return UpdateDomainFlagsResponse
+	     */
+	    public function UpdateDomainFlags(Domain $domain, IChangelist $changes)
 		{
 			throw new NotImplementedException();
 		}
 	    
-		/**
+	    /**
 		 * Register domain.
 		 * This operation supports pending status. If you return response object with Status = REGISTRY_RESPONSE_STATUS.PENDING, you must return response later during a poll.
-		 * See IRegistryModuleClientPollable::PollCreateDomain().
+	     * See IRegistryModuleClientPollable::PollCreateDomain().
 		 *	 
 		 * @param Domain $domain
 		 * @param int $period Domain registration period
@@ -253,6 +239,7 @@
 		public function CreateDomain(Domain $domain, $period, $extra = array())
 		{
 			$contact_list = $domain->GetContactList();
+
 			$params = array( 'order' => array(
 				'Type' => 'Register_Domain',
 				'Comments' => 'EPP-DRS Order',
@@ -305,10 +292,11 @@
 			return $Ret;
 		}
 	
-		/**
-		 * Get OrderID from pending_operations queue
-		 */
-		private function GetPendingID ($object_type=null, $object_id=null, $op_type=null)
+                /**
+                 * Get OrderID from pending_operations queue
+                 *
+                 */
+                private function GetPendingID ($object_type=null, $object_id=null, $op_type=null)
                 {
 			$ops = $this->RegistryAccessible->GetPendingOperationList($object_type, $object_id);
 			foreach ($ops as $op) {
@@ -320,9 +308,10 @@
                         return $PendingID;
                 }
 
-		/**
-		 * Get DomainHandle by Domain
-		 */
+                /**
+                 * Get DomainHandle by Domain
+                 *
+                 */
                 private $DomainHandle;
 
                 private function GetDomainHandle ($domain)
@@ -367,6 +356,9 @@
 				return $Ret;
 			}
 			$Ret = new GetRemoteDomainResponse(REGISTRY_RESPONSE_STATUS::SUCCESS, $Resp->ErrMsg, $Resp->Code);
+			// TODO: Testing, fixes Update Status Transfered bug?
+                        //$Ret->CLID = (string)$Resp->Data->domain->Registrant->{'Handle'};
+                        //$Ret->CRID = (string)$Resp->Data->domain->{'DomainHandle'};
 			$Ret->CLID = $this->GetRegistrarID();
 			$Ret->CRID = $Ret->CLID;
                         $Ret->ExpireDate = strtotime($Resp->Data->domain->{'ExpDate'});
@@ -414,7 +406,6 @@
 		 *
 		 * @return string
 		 */
-
 		/*
 		public function GetHostIpAddress ($hostname)
 		{
@@ -433,7 +424,7 @@
 		/**
 		 * Swap domain's existing contact with another one
 		 * This operation supports pending status. If you return response object with Status = REGISTRY_RESPONSE_STATUS.PENDING, you must return response later during a poll.
-		 * See IRegistryModuleClientPollable::PollCreateDomain().
+	     * See IRegistryModuleClientPollable::PollCreateDomain().
 		 * 
 		 * @param Domain $domain Domain
 		 * @param string $contactType contact type. Should be one of CONTACT_TYPE members.
@@ -506,7 +497,7 @@
 		/**
 		 * Change nameservers for specific domain 
 		 * This operation supports pending status. If you return response object with Status = REGISTRY_RESPONSE_STATUS.PENDING, you must return response later during a poll.
-		 * See IRegistryModuleClientPollable::PollUpdateDomain().
+	     * See IRegistryModuleClientPollable::PollUpdateDomain().
 		 * 
 		 * @param Domain $domain Domain
 		 * @param IChangelist $changelist Changes in a list of nameservers 
@@ -568,6 +559,8 @@
                         	return $Ret;
 		}
 
+	
+		
 		/**
 		 * Completely delete domain from registry if it is delegated or  
 		 * recall domain name application if it was not yet delegated.
@@ -629,7 +622,7 @@
 		/**
 		 * Send a request for domain transfer
 		 * This operation supports pending status. If you return response object with Status = REGISTRY_RESPONSE_STATUS.PENDING, you must return response later during a poll.
-		 * See IRegistryModuleClientPollable::PollTransfer().
+	     * See IRegistryModuleClientPollable::PollTransfer().
 		 * 
 		 * @param string $domain Domain
 		 * @param array $extradata Extra fields
@@ -637,19 +630,40 @@
 		 */	
 		public function TransferRequest(Domain $domain, $extra=array())
 		{
+
+			$contact_list = $domain->GetContactList();
+
 			$params = array( 'order' => array(
 				'Type' => 'Transfer_Domain',
 				'Domain' => array(
 				'Comments' => 'EPP-DRS Transfer Order',
 				'DomainName' => $this->MakeNameIDNCompatible($domain->Name.'.'.$domain->Extension),
-				'AuthInfo' => $extra['pw']
+				'Registrant' =>  array('Handle' => $contact_list[CONTACT_TYPE::REGISTRANT]->CLID),
+				'AdminContact' => array('Handle' => $contact_list[CONTACT_TYPE::ADMIN]->CLID),
+				'TechContact' => array('Handle' => $contact_list[CONTACT_TYPE::TECH]->CLID),
+				'BillingContact' => array('Handle' => $contact_list[CONTACT_TYPE::BILLING]->CLID),
+				'AuthInfo' => $extra['pw'],
+				'Trademark' =>  array('Country' => $contact_list[CONTACT_TYPE::REGISTRANT]->ExtraStoredData['Trademark'])
 			)));
+
+                        // NS
+                        $nameservers = array('ns1.ascio.com', 'ns2.ascio.com', 'ns3.ascio.com', 'ns4.ascio.com');
+                        $n = 1;
+                        foreach ($nameservers as $ns)
+                        {
+                                $params['order']['Domain']['NameServers']['NameServer' . $n]['HostName'] = $ns;
+                                $n++;
+                        }
+                        // TLD specific extra fields
+                        $params = array_merge($params, $extra);
+
 			$Resp = $this->Request('CreateOrder', $params);
 
                         $status = $Resp->Succeed ? REGISTRY_RESPONSE_STATUS::PENDING : REGISTRY_RESPONSE_STATUS::FAILED;
                         $Ret = new TransferRequestResponse($status, $Resp->ErrMsg, $Resp->Code);
                         $Ret->Result = $status != REGISTRY_RESPONSE_STATUS::FAILED;
-			$Ret->TransferID = (string)$Resp->Data->order->OrderId;
+			$Ret->TransferID = $Resp->Data->order->OrderId;
+			$Ret->OperationId = $Resp->Data->order->OrderId;
 
                         return $Ret;
 		}
@@ -706,6 +720,7 @@
 			return $Ret;
 			*/
 
+			//disabled 12.12.2013 !!
 			throw new NotImplementedException();
 		}
 		
@@ -736,10 +751,9 @@
 			
 			$Resp = $this->Request('CreateNameServer', $params);
 			
-	    		$status = $Resp->Succeed ? REGISTRY_RESPONSE_STATUS::SUCCESS : REGISTRY_RESPONSE_STATUS::FAILED;
-	    		$Ret = new CreateNameserverHostResponse($status, $Resp->ErrMsg, $Resp->Code);
-	    		$Ret->Result = ($Resp->Data->ErrCount == 0);
-
+	    	$status = $Resp->Succeed ? REGISTRY_RESPONSE_STATUS::SUCCESS : REGISTRY_RESPONSE_STATUS::FAILED;
+	    	$Ret = new CreateNameserverHostResponse($status, $Resp->ErrMsg, $Resp->Code);
+	    	$Ret->Result = ($Resp->Data->ErrCount == 0);
 			return $Ret;
 		}
 		
@@ -784,7 +798,7 @@
 		/**
 		 * Delete namserver host from registry
 		 * This operation supports pending status. If you return response object with Status = REGISTRY_RESPONSE_STATUS.PENDING, you must return response later during a poll.
-		 * See IRegistryModuleClientPollable::PollDeleteNameserverHost().
+	     * See IRegistryModuleClientPollable::PollDeleteNameserverHost().
 		 * 
 		 * @param NameserverHost $ns
 		 * @return DeleteNameserverHostResponse 
@@ -1113,12 +1127,13 @@
                         return new PollChangeDomainOwnerResponse(REGISTRY_RESPONSE_STATUS::FAILED, $AWSResp->ErrMsg, $AWSResp->Code);
         	}
 
+	
 		/**
 		 * Transfer status constants
 		 * 
 		 * @see http://aws.ascio.info/docs/AWSReference-2.0.8.pdf 8.3 GetOrder
 		 */
-		// TODO: correct params! 
+		// TODO: Durch korrekte Params ersetzen
 		const TRANSFERSTATUS_CANCELLED = 2;
 		const TRANSFERSTATUS_COMPLETE = 3;
 		
@@ -1140,8 +1155,9 @@
 			
 			if ($Resp->Succeed)
 			{
-				// TODO: correct objects
+				// TODO: Durch richtiges Objekt ersetzen
 				$statusid = (int)$Resp->Data->transferorder->statusid;
+
 				if ($statusid == self::TRANSFERSTATUS_COMPLETE)
 				{
 					$tstatus = TRANSFER_STATUS::APPROVED;
