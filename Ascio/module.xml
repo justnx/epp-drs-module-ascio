@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <module
 	schemaLocation="http://schemas.epp-drs.com/2008-03-10/registry-module-manifest.xsd"
-	name="ascio" 
-	description="ASCIO" 
+	name="ascio"
+	description="ASCIO"
 	version="v3">
-	
+
 	<define name="domain_registration_extra_fields">
 		<field description="IDN language tag" type="select" name="IDNLanguage" required="0">
 			<values>
@@ -159,22 +159,22 @@
 		<min_days>365</min_days>
 	</define>
 
-    <define name="registrant_fields">
-            <field iseditable="0" description="Full name" type="text" name="Name" required="1" minlength="1" maxlength="255" />
-            <field iseditable="0" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
-            <field iseditable="1" description="Organisation Number" type="text" name="OrganisationNumber" required="0" minlength="1" maxlength="60" />
-            <field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
-            <field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
-            <field iseditable="1" description="Postal code" type="text" name="PostalCode" required="1" minlength="2" maxlength="60" />
-            <field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
-            <field iseditable="1" description="State" type="text" name="State" required="0" minlength="2" maxlength="60" />
-            <field iseditable="1" description="CountryCode" type="select" name="CountryCode" required="1" minlength="2" maxlength="2" pattern="/^[A-Za-z]{2}$/">
-                <database table="countries" value_field="code" name_field="name" />
-            </field>
-            <field iseditable="1" description="Email" type="text" name="Email" required="1" minlength="2" maxlength="81" pattern="/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/" />
-            <field iseditable="1" description="Phone" type="phone" registry_format="+[2].[4-16]" name="Phone" required="1" />
-            <field iseditable="1" description="Fax" type="phone" registry_format="+[2].[4-16]" name="Fax" required="1" />
-    </define>
+	<define name="registrant_fields">
+		<field iseditable="0" description="Full name" type="text" name="Name" required="1" minlength="1" maxlength="255" />
+		<field iseditable="0" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
+		<field iseditable="1" description="Organisation Number" type="text" name="RegistrantNumber" required="0" minlength="1" maxlength="60" />
+		<field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
+		<field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
+		<field iseditable="1" description="Postal code" type="text" name="PostalCode" required="1" minlength="2" maxlength="60" />
+		<field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
+		<field iseditable="1" description="State" type="text" name="State" required="1" minlength="2" maxlength="60" />
+		<field iseditable="1" description="CountryCode" type="select" name="CountryCode" required="1" minlength="2" maxlength="2" pattern="/^[A-Za-z]{2}$/">
+			<database table="countries" value_field="code" name_field="name" />
+		</field>
+		<field iseditable="1" description="Email" type="text" name="Email" required="1" minlength="2" maxlength="81" pattern="/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/" />
+		<field iseditable="1" description="Phone" type="phone" registry_format="+[2].[4-16]" name="Phone" required="1" />
+		<field iseditable="1" description="Fax" type="phone" registry_format="+[2].[4-16]" name="Fax" required="0" />
+	</define>
 	
 	<define name="contact_fields">
 		<field iseditable="1" description="First name" type="text" name="FirstName" required="1" minlength="1" maxlength="60" />
@@ -185,13 +185,13 @@
 		<field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
 		<field iseditable="1" description="Postal code" type="text" name="PostalCode" required="1" minlength="2" maxlength="60" />		
 		<field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
-		<field iseditable="1" description="State" type="text" name="State" required="0" minlength="2" maxlength="60" />
+		<field iseditable="1" description="State" type="text" name="State" required="1" minlength="2" maxlength="60" />
 		<field iseditable="1" description="CountryCode" type="select" name="CountryCode" required="1" minlength="2" maxlength="2" pattern="/^[A-Za-z]{2}$/">
 			<database table="countries" value_field="code" name_field="name" />
 		</field>
 		<field iseditable="1" description="Email" type="text" name="Email" required="1" minlength="2" maxlength="81" pattern="/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/" />
 		<field iseditable="1" description="Phone" type="phone" registry_format="+[2].[4-16]" name="Phone" required="1" />
-		<field iseditable="1" description="Fax" type="phone" registry_format="+[2].[4-16]" name="Fax" required="1" />						
+		<field iseditable="1" description="Fax" type="phone" registry_format="+[2].[4-16]" name="Fax" required="0" />
 	</define>
 
     <define name="registrant_display_fields">
@@ -214,20 +214,20 @@
 			<field name="Email" />
 		</email>
 	</define>
-	
+
 	<define name="contacts">
 		<contact group="registrant" required="1" type="registrant" name="Registrant" new_id="%d8" />
 		<contact group="contact" required="1" type="tech" name="Technical" new_id="%d8" />
 		<contact group="contact" required="1" type="admin" name="Administrative" new_id="%d8" />
 		<contact group="contact" required="1" type="billing" name="Billing" new_id="%d8" />
 	</define>
-	
+
 	<define name="contact_targets">
 		<target_group name="all">
 			<target tlds="asia,biz,com,info,mobi,name,net,org,cc,cn,nu,tv,tw,bz,tm,ws,vg,la,ms,tc,uk,in,nu,ac,at,be,ca,de,eu,gs,io,it,jp,nl,nz,sh,us,kids.us,br.com,cn.com,de.com,eu.com,hu.com,no.com,qc.com,ru.com,sa.com,se.com,uk.com,us.com,uy.com,za.com,uk.net,se.net,com.mx,pro,aaa.pro,aca.pro,cpa.pro,acct.pro,eng.pro,avocat.pro,bar.pro,law.pro,jur.pro,recht.pro,med.pro,tel,cm,co,me" />
 		</target_group>
 	</define>
-	
+
 	<define name="us_extra_fields">
 		<field type="select" name="global_cc_us" description="US Global Country" required="1" iseditable="1">
 			<values>
@@ -474,7 +474,7 @@
 				<value name="Zimbabwe" value="ZW"/>
 			</values>
 		</field>
-				
+
 		<field type="select" name="us_nexus" description="Nexus Category" required="1"  iseditable="1">
 			<values>
 				<value name="US Citizen" value="C11"/>
@@ -492,15 +492,15 @@
 				<value name="Educational" value="P4"/>
 				<value name="Government" value="P5"/>
 			</values>
-		</field>					
+		</field>
 	</define>
-	
+
 	<registry_options>
-	
+
 		<host_objects>
 			<is_managed>1</is_managed>
 			<update_all_ns>1</update_all_ns>
-			<max_ns>2</max_ns>								
+			<max_ns>2</max_ns>
 		</host_objects>
 
 		<ability>
@@ -516,13 +516,13 @@
 			<trade>0</trade>
 			<update_contact>1</update_contact>
 		</ability>
-		
-		<registrar_contacts />		
-	
+
+		<registrar_contacts />
+
 		<allowed_domain_flags />
-	
+
 	</registry_options>
-	
+
 	<section tlds="asia" name=".ASIA">
 		<config>
 			<domain>
@@ -537,24 +537,24 @@
 				<renewal extends="domain_renewal" />
 				<transfer extends="domain_transfer_not_allowed" />
 			</domain>
-			
+
 			<contact_groups>
 				 <group name="registrant" assoc_with_domain="1" title="Registrant (Any)" target-group="all">
                                         <fields extends="registrant_fields">
 						<field iseditable="1" description="Full name" type="text" name="Name" required="1" minlength="3" maxlength="255" />
                                                 <field iseditable="1" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
-                                                <field iseditable="1" description="Organisation Number" type="text" name="OrganisationNumber" required="0" minlength="1" maxlength="60" />
+                                                <field iseditable="1" description="Organisation Number" type="text" name="RegistrantNumber" required="0" minlength="1" maxlength="60" />
                                                 <field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
-                                                <field iseditable="1" description="State" type="text" name="State" required="0" minlength="2" maxlength="60" />
+                                                <field iseditable="1" description="State" type="text" name="State" required="1" minlength="2" maxlength="60" />
                                                 <field iseditable="1" description="Postal code" type="text" name="PostalCode" required="1" minlength="2" maxlength="60" />
                                                 <field iseditable="1" description="CountryCode" type="select" name="CountryCode" required="1" minlength="2" maxlength="2" pattern="/^[A-Za-z]{2}$/">
                                                         <database table="countries" value_field="code" name_field="name" />
                                                 </field>
                                                 <field iseditable="1" description="Email" type="text" name="Email" required="1" minlength="2" maxlength="81" pattern="/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/" />
                                                 <field iseditable="1" description="Phone" type="phone" registry_format="+[2].[4-16]" name="Phone" required="1" />
-                                                <field iseditable="1" description="Fax" type="phone" registry_format="+[2].[4-16]" name="Fax" required="1" />
+                                                <field iseditable="1" description="Fax" type="phone" registry_format="+[2].[4-16]" name="Fax" required="0" />
                                                 <field iseditable="1" type="select" name="asia_cclocality" description="Locality of Establishment of the Entity" required="1">
                                                         <values>
                                                                 <value name="Afghanistan" value="af"/>
@@ -675,7 +675,7 @@
 						<field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
 						<field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
 						<field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
-						<field iseditable="1" description="State" type="text" name="State" required="0" minlength="2" maxlength="60" />
+						<field iseditable="1" description="State" type="text" name="State" required="1" minlength="2" maxlength="60" />
 						<field iseditable="1" description="Postal code" type="text" name="PostalCode" required="1" minlength="2" maxlength="60" />
 						<field iseditable="1" description="CountryCode" type="select" name="CountryCode" required="1" minlength="2" maxlength="2" pattern="/^[A-Za-z]{2}$/">
 							<database table="countries" value_field="code" name_field="name" />
@@ -1433,18 +1433,49 @@
 				</registration>
 		
 				<renewal extends="domain_renewal" />
-				<transfer extends="domain_transfer_not_allowed" />
+				<transfer extends="domain_transfer" />
 			</domain>
 			
 			<contact_groups>
-                                <group name="registrant" assoc_with_domain="1" title="Registrant (Any)" target-group="all">
-                                        <fields extends="registrant_fields" />
-                                        <disclose />
-                                        <display_fields extends="registrant_display_fields" />
-                                        <extra_fields />
-                                </group>
+				<group name="registrant" assoc_with_domain="1" title="Registrant (Any)" target-group="all">
+					<fields extends="registrant_fields">
+						<field type="select" name="RegistrantType" description="Registrant Type" required="1"  iseditable="1">
+							<values>
+								<value name="Individual non Company" value="1"/>
+								<value name="Italian Company" value="2"/>
+								<value name="Italian Freelance" value="3"/>
+								<value name="Italian Associations" value="4"/>
+								<value name="Italian NGOs (non-profit)" value="5"/>
+								<value name="Italian Governmental bodies" value="6"/>
+								<value name="Applicants equivalent to points 2-6 but located outside of Italy" value="7"/>
+							</values>
+						</field>
+						<field iseditable="1" description="Place of Birth" type="select" name="Trademark" required="1" minlength="2" maxlength="2" pattern="/^[A-Za-z]{2}$/">
+							<database table="countries" value_field="code" name_field="name" />
+						</field>
+					</fields>
+					<disclose />
+					<display_fields extends="registrant_display_fields" />
+					<extra_fields />
+				</group>
 				<group name="contact" assoc_with_domain="0" title="Contact (Any)" target-group="all">
-					<fields extends="contact_fields" />
+					<fields extends="contact_fields">
+						<field type="select" name="RegistrantType" description="Registrant Type" required="1"  iseditable="1">
+							<values>
+								<value name="Individual non Company" value="1"/>
+								<value name="Italian Company" value="2"/>
+								<value name="Italian Freelance" value="3"/>
+								<value name="Italian Associations" value="4"/>
+								<value name="Italian NGOs (non-profit)" value="5"/>
+								<value name="Italian Governmental bodies" value="6"/>
+								<value name="Applicants equivalent to points 2-6 but located outside of Italy" value="7"/>
+							</values>
+						</field>
+                                                <field iseditable="1" description="Place of Birth" type="select" name="Trademark" required="1" minlength="2" maxlength="2" pattern="/^[A-Za-z]{2}$/
+">
+                                                        <database table="countries" value_field="code" name_field="name" />
+                                                </field>
+					</fields>
 					<disclose />
 					<display_fields extends="contact_display_fields" />
 					<extra_fields />
@@ -1680,11 +1711,11 @@
                                         <fields extends="us_extra_fields">
                                                 <field iseditable="1" description="Full name" type="text" name="Name" required="1" minlength="1" maxlength="255" />
                                                 <field iseditable="1" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
-                                                <field iseditable="1" description="Organisation Number" type="text" name="OrganisationNumber" required="1" minlength="1" maxlength="60" />
+                                                <field iseditable="1" description="Organisation Number" type="text" name="RegistrantNumber" required="1" minlength="1" maxlength="60" />
                                                 <field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
-                                                <field iseditable="1" description="State" type="text" name="State" required="0" minlength="2" maxlength="60"></field>
+                                                <field iseditable="1" description="State" type="text" name="State" required="1" minlength="2" maxlength="60"></field>
                                                 <field iseditable="1" description="Postal code" type="text" name="PostalCode" required="1" minlength="2" maxlength="60" />
                                                 <field iseditable="1" description="CountryCode" type="select" name="CountryCode" required="1" minlength="2" maxlength="2" pattern="/^[A-Za-z]{2}$/">
                                                         <database table="countries" value_field="code" name_field="name" />
@@ -1692,7 +1723,7 @@
                                                 <field iseditable="1" description="Email" type="text" name="Email" required="1" minlength="2" maxlength="81" pattern="/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[
 a-zA-Z0-9\-\.]+$/" />
                                                 <field iseditable="1" description="Phone" type="phone" registry_format="+[2].[4-16]" name="Phone" required="1" />
-                                                <field iseditable="1" description="Fax" type="phone" registry_format="+[2].[4-16]" name="Fax" required="1" />
+                                                <field iseditable="1" description="Fax" type="phone" registry_format="+[2].[4-16]" name="Fax" required="0" />
                                         </fields>
                                         <disclose />
                                         <display_fields extends="registrant_display_fields" />
@@ -1707,14 +1738,14 @@ a-zA-Z0-9\-\.]+$/" />
 						<field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
 						<field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
 						<field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
-						<field iseditable="1" description="State" type="text" name="State" required="0" minlength="2" maxlength="60"></field>
+						<field iseditable="1" description="State" type="text" name="State" required="1" minlength="2" maxlength="60"></field>
 						<field iseditable="1" description="Postal code" type="text" name="PostalCode" required="1" minlength="2" maxlength="60" />
 						<field iseditable="1" description="CountryCode" type="select" name="CountryCode" required="1" minlength="2" maxlength="2" pattern="/^[A-Za-z]{2}$/">
 							<database table="countries" value_field="code" name_field="name" />
 						</field>
 						<field iseditable="1" description="Email" type="text" name="Email" required="1" minlength="2" maxlength="81" pattern="/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/" />
 						<field iseditable="1" description="Phone" type="phone" registry_format="+[2].[4-16]" name="Phone" required="1" />
-						<field iseditable="1" description="Fax" type="phone" registry_format="+[2].[4-16]" name="Fax" required="1" />						
+						<field iseditable="1" description="Fax" type="phone" registry_format="+[2].[4-16]" name="Fax" required="0" />
 					</fields>
 					<disclose />
 					<display_fields extends="contact_display_fields" />
@@ -1748,11 +1779,11 @@ a-zA-Z0-9\-\.]+$/" />
                                         <fields extends="us_extra_fields">
                                                 <field iseditable="1" description="Full name" type="text" name="Name" required="1" minlength="1" maxlength="255" />
                                                 <field iseditable="1" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
-                                                <field iseditable="1" description="Organisation Number" type="text" name="OrganisationNumber" required="1" minlength="1" maxlength="60" />
+                                                <field iseditable="1" description="Organisation Number" type="text" name="RegistrantNumber" required="1" minlength="1" maxlength="60" />
                                                 <field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
-                                                <field iseditable="1" description="State" type="text" name="State" required="0" minlength="2" maxlength="60" />
+                                                <field iseditable="1" description="State" type="text" name="State" required="1" minlength="2" maxlength="60" />
                                                 <field iseditable="1" description="Postal code" type="text" name="PostalCode" required="1" minlength="2" maxlength="60" />
                                                 <field iseditable="1" description="CountryCode" type="select" name="CountryCode" required="1" minlength="2" maxlength="2" pattern="/^[A-Za-z]{2}$/">
                                                         <database table="countries" value_field="code" name_field="name" />
@@ -1760,7 +1791,7 @@ a-zA-Z0-9\-\.]+$/" />
                                                 <field iseditable="1" description="Email" type="text" name="Email" required="1" minlength="2" maxlength="81" pattern="/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[
 a-zA-Z0-9\-\.]+$/" />
                                                 <field iseditable="1" description="Phone" type="phone" registry_format="+[2].[4-16]" name="Phone" required="1" />
-                                                <field iseditable="1" description="Fax" type="phone" registry_format="+[2].[4-16]" name="Fax" required="1" />
+                                                <field iseditable="1" description="Fax" type="phone" registry_format="+[2].[4-16]" name="Fax" required="0" />
                                         </fields>
                                         <disclose />
                                         <display_fields extends="registrant_display_fields" />
@@ -1775,14 +1806,14 @@ a-zA-Z0-9\-\.]+$/" />
 						<field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
 						<field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
 						<field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
-						<field iseditable="1" description="State" type="text" name="State" required="0" minlength="2" maxlength="60" />
+						<field iseditable="1" description="State" type="text" name="State" required="1" minlength="2" maxlength="60" />
 						<field iseditable="1" description="Postal code" type="text" name="PostalCode" required="1" minlength="2" maxlength="60" />
 						<field iseditable="1" description="CountryCode" type="select" name="CountryCode" required="1" minlength="2" maxlength="2" pattern="/^[A-Za-z]{2}$/">
 							<database table="countries" value_field="code" name_field="name" />
 						</field>
 						<field iseditable="1" description="Email" type="text" name="Email" required="1" minlength="2" maxlength="81" pattern="/^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$/" />
 						<field iseditable="1" description="Phone" type="phone" registry_format="+[2].[4-16]" name="Phone" required="1" />
-						<field iseditable="1" description="Fax" type="phone" registry_format="+[2].[4-16]" name="Fax" required="1" />						
+						<field iseditable="1" description="Fax" type="phone" registry_format="+[2].[4-16]" name="Fax" required="0" />
 					</fields>
 					<disclose />
 					<display_fields extends="contact_display_fields" />
