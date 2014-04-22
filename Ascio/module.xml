@@ -162,7 +162,7 @@
 	<define name="registrant_fields">
 		<field iseditable="0" description="Full name" type="text" name="Name" required="1" minlength="1" maxlength="255" />
 		<field iseditable="0" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
-		<field iseditable="1" description="Organisation Number" type="text" name="RegistrantNumber" required="0" minlength="1" maxlength="60" />
+		<field iseditable="1" description="Organisation/Passport Number" type="text" name="RegistrantNumber" required="0" minlength="1" maxlength="60" />
 		<field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
 		<field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
 		<field iseditable="1" description="Postal code" type="text" name="PostalCode" required="1" minlength="2" maxlength="60" />
@@ -180,7 +180,7 @@
 		<field iseditable="1" description="First name" type="text" name="FirstName" required="1" minlength="1" maxlength="60" />
 		<field iseditable="1" description="Last name" type="text" name="LastName" required="1" minlength="1" maxlength="60" />
 		<field iseditable="1" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
-		<field iseditable="1" description="Organisation Number" type="text" name="OrganisationNumber" required="0" minlength="1" maxlength="60" />
+		<field iseditable="1" description="Organisation/Passport Number" type="text" name="OrganisationNumber" required="0" minlength="1" maxlength="60" />
 		<field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
 		<field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
 		<field iseditable="1" description="Postal code" type="text" name="PostalCode" required="1" minlength="2" maxlength="60" />		
@@ -224,7 +224,7 @@
 
 	<define name="contact_targets">
 		<target_group name="all">
-			<target tlds="asia,biz,com,info,mobi,name,net,org,cc,cn,nu,tv,tw,bz,tm,ws,vg,la,ms,tc,uk,in,nu,ac,at,be,ca,de,eu,gs,io,it,jp,nl,nz,sh,us,kids.us,br.com,cn.com,de.com,eu.com,hu.com,no.com,qc.com,ru.com,sa.com,se.com,uk.com,us.com,uy.com,za.com,uk.net,se.net,com.mx,pro,aaa.pro,aca.pro,cpa.pro,acct.pro,eng.pro,avocat.pro,bar.pro,law.pro,jur.pro,recht.pro,med.pro,tel,cm,co,me" />
+			<target tlds="asia,biz,com,info,mobi,name,net,org,cc,cn,nu,tv,tw,bz,tm,ws,vg,la,ms,tc,uk,in,nu,ac,at,be,ca,de,es,com.es,nom.es,org.es,eu,gs,io,it,jp,nl,nz,sh,us,kids.us,br.com,cn.com,de.com,eu.com,hu.com,no.com,qc.com,ru.com,sa.com,se.com,uk.com,us.com,uy.com,za.com,uk.net,se.net,com.mx,pro,aaa.pro,aca.pro,cpa.pro,acct.pro,eng.pro,avocat.pro,bar.pro,law.pro,jur.pro,recht.pro,med.pro,tel,cm,co,me" />
 		</target_group>
 	</define>
 
@@ -543,7 +543,7 @@
                                         <fields extends="registrant_fields">
 						<field iseditable="1" description="Full name" type="text" name="Name" required="1" minlength="3" maxlength="255" />
                                                 <field iseditable="1" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
-                                                <field iseditable="1" description="Organisation Number" type="text" name="RegistrantNumber" required="0" minlength="1" maxlength="60" />
+                                                <field iseditable="1" description="Organisation/Passport Number" type="text" name="RegistrantNumber" required="0" minlength="1" maxlength="60" />
                                                 <field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
@@ -671,7 +671,7 @@
 						<field iseditable="1" description="First name" type="text" name="FirstName" required="1" minlength="1" maxlength="60" />
 						<field iseditable="1" description="Last name" type="text" name="LastName" required="1" minlength="1" maxlength="60" />
 						<field iseditable="1" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
-						<field iseditable="1" description="Organisation Number" type="text" name="OrganisationNumber" required="0" minlength="1" maxlength="60" />
+						<field iseditable="1" description="Organisation/Passport Number" type="text" name="OrganisationNumber" required="0" minlength="1" maxlength="60" />
 						<field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
 						<field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
 						<field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
@@ -1277,9 +1277,213 @@
 		</config>
 	</section>
 
+	<section tlds="es,com.es,nom.es,org.es" name=".ES">
+		<config>
+			<domain>
+				<registration>
+					<min_period>1</min_period>
+					<max_period>10</max_period>
+					<min_ns>2</min_ns>
+					<max_ns>0</max_ns>
+					<extra_fields extends="domain_registration_extra_fields">
+						<field type="checkbox" name="es_agreedelete" description="I agree to the renewal terms for this domain name" required="1" value="YES"/>					
+					</extra_fields>
+				</registration>
+		
+				<renewal extends="domain_renewal" />
+				<transfer extends="domain_transfer" />
+			</domain>
+			
+			<contact_groups>
+				<group name="registrant" assoc_with_domain="1" title="Registrant (Any)" target-group="all">
+					<fields extends="registrant_fields">
+						<field type="select" name="RegistrantType" description="Registrant Type" required="1" iseditable="1">
+							<values>
+								<value name="Natural person or individual [Persona Física o Particular]" value="1"/>
+								<value name="Economic Interest Grouping [Agrupación de Interés Económico]" value="39"/>
+								<value name="Association [Asociación]" value="47"/>
+								<value name="Sports Association [Asociación Deportiva]" value="59"/>
+								<value name="Trade Association [Asociación Gremial]" value="68"/>
+								<value name="Savings Bank [Caja de Ahorros]" value="124"/>
+ 								<value name="Community Property [Comunidad de Bienes]" value="150"/>
+								<value name="Condominium [Comunidad de Propietarios]" value="152"/>
+								<value name="Religious Order or Institution [Congregación o Institución Religiosa]" value="164"/>
+								<value name="Consulate [Consulado]" value="181"/>
+								<value name="Public Law Association [Corporación de Derecho Público]" value="197"/>
+								<value name="Embassy [Embajada]" value="203"/>
+								<value name="Municipality [Entidad Local]" value="229"/>
+								<value name="Sports Federation [Federación Deportiva]" value="269"/>
+								<value name="Foundation [Fundación]" value="286"/>
+								<value name="Mutual Insurance Company [Mutua de Seguros]" value="365"/>
+								<value name="Provincial Government Body [Órgano de la Administración Autonómica]" value="434"/>
+								<value name="National Government Body [Órgano de la Administración del Estado]" value="436"/>
+								<value name="Political Party [Partido Político]" value="439"/>
+								<value name="Trade Union [Sindicato]" value="476"/>
+								<value name="Farm Partnership [Sociedad Agraria de Transformación]" value="510"/>
+								<value name="Public Limited Company/Corporation [Sociedad Anónima]" value="524"/>
+								<value name="Sports Public Limited Company [Sociedad Anónima Deportiva]" value="525"/>
+								<value name="Partnership [Sociedad Civil]" value="554"/>
+								<value name="General Partnership [Sociedad Colectiva]" value="560"/>
+								<value name="Limited Partnership [Sociedad Comanditaria]" value="562"/>
+								<value name="Cooperative [Sociedad Cooperativa]" value="566"/>
+								<value name="Worker-owned Company [Sociedad Laboral Limitada]" value="608"/>
+								<value name="Limited Liability Company [Sociedad Limitada]" value="612"/>
+								<value name="Spanish (company) Branch [Sucursal en España]" value="713"/>
+								<value name="Temporary Consortium/Joint Venture [Unión Temporal de Empresas]" value="717"/>
+								<value name="Worker-owned Limited Company [Sociedad Anónima Laboral]" value="744"/>
+								<value name="Provincial Government Entity [Organismo Público Autonómico]" value="745"/>
+								<value name="National Government Entity [Organismo Público Estatal]" value="746"/>
+								<value name="Local Government Entity [Organismo Público Local]" value="747"/>
+								<value name="Others [Otras]" value="877"/>
+								<value name="Designation of Origin Regulatory Council [Consejo Regulador de Denominación de Origen]" value="878"/>
+								<value name="Natural Area Management Entity [Organismo Gestor de Espacio Natural]" value="879"/>
+							</values>
+						</field>
+						<!-- required if CountryCode=ES -->
+						<field iseditable="1" description="Spanish province" type="select" name="ESState" required="0">
+							<values>
+								<value name="None" value=""/>
+								<value name="ARABA" value="ARABA"/>
+								<value name="ALBACETE" value="ALBACETE"/>
+								<value name="ALICANTE" value="ALICANTE"/>
+								<value name="ALMERIA" value="ALMERIA"/>
+								<value name="AVILA" value="AVILA"/>
+								<value name="BADAJOZ" value="BADAJOZ"/>
+								<value name="ILLES BALEARS" value="ILLES BALEARS"/>
+								<value name="BARCELONA" value="BARCELONA"/>
+								<value name="BURGOS" value="BURGOS"/>
+								<value name="CACERES" value="CACERES"/>
+								<value name="CADIZ" value="CADIZ"/>
+								<value name="CASTELLON" value="CASTELLON"/>
+								<value name="CIUDAD REAL" value="CIUDAD REAL"/>
+								<value name="CORDOBA" value="CORDOBA"/>
+								<value name="CORUÑA, A" value="CORUÑA, A"/>
+								<value name="CUENCA" value="CUENCA"/>
+								<value name="GIRONA" value="GIRONA"/>
+								<value name="GRANADA" value="GRANADA"/>
+								<value name="GUADALAJARA" value="GUADALAJARA"/>
+								<value name="GIPUZKOA" value="GIPUZKOA"/>
+								<value name="HUELVA" value="HUELVA"/>
+								<value name="HUESCA" value="HUESCA"/>
+								<value name="JAEN" value="JAEN"/>
+								<value name="LEON" value="LEON"/>
+								<value name="LLEIDA" value="LLEIDA"/>
+								<value name="RIOJA, LA" value="RIOJA, LA"/>
+								<value name="LUGO" value="LUGO"/>
+								<value name="MADRID" value="MADRID"/>
+								<value name="MALAGA" value="MALAGA"/>
+								<value name="MURCIA" value="MURCIA"/>
+								<value name="NAVARRA" value="NAVARRA"/>
+								<value name="OURENSE" value="OURENSE"/>
+								<value name="ASTURIAS" value="ASTURIAS"/>
+								<value name="PALENCIA" value="PALENCIA"/>
+								<value name="PALMAS, LAS" value="PALMAS, LAS"/>
+								<value name="PONTEVEDRA" value="PONTEVEDRA"/>
+								<value name="SALAMANCA" value="SALAMANCA"/>
+								<value name="SANTA CRUZ DE TENERIFE" value="SANTA CRUZ DE TENERIFE"/>
+								<value name="CANTABRIA" value="CANTABRIA"/>
+								<value name="SEGOVIA" value="SEGOVIA"/>
+								<value name="SEVILLA" value="SEVILLA"/>
+								<value name="SORIA" value="SORIA"/>
+								<value name="TARRAGONA" value="TARRAGONA"/>
+								<value name="TERUEL" value="TERUEL"/>
+								<value name="TOLEDO" value="TOLEDO"/>
+								<value name="VALENCIA" value="VALENCIA"/>
+								<value name="VALLADOLID" value="VALLADOLID"/>
+								<value name="BIZKAIA" value="BIZKAIA"/>
+								<value name="ZAMORA" value="ZAMORA"/>
+								<value name="ZARAGOZA" value="ZARAGOZA"/>
+								<value name="CEUTA" value="CEUTA"/>
+								<value name="MELILLA" value="MELILLA"/>
+							</values>
+						</field>
+						</fields>
+					<disclose />
+					<display_fields extends="registrant_display_fields" />
+					<extra_fields />
+				</group>
+				<group name="contact" assoc_with_domain="0" title="Contact (Any)" target-group="all">
+					<fields extends="contact_fields">
+						<field type="select" name="Type" description="Contact Type" required="1" iseditable="1">
+							<values>
+								<value name="Individual non Company" value="0"/>
+								<value name="Company located outside Spain" value="1"/>
+							</values>
+						</field>
+                                                <!-- required if CountryCode=ES -->
+                                                <field iseditable="1" description="Spanish province" type="select" name="ESState" required="0">
+							<values>
+	                                                        <value name="ARABA" value="ARABA"/>
+                	                                        <value name="ALBACETE" value="ALBACETE"/>
+                        	                                <value name="ALICANTE" value="ALICANTE"/>
+                                	                        <value name="ALMERIA" value="ALMERIA"/>
+                                        	                <value name="AVILA" value="AVILA"/>
+                                                	        <value name="BADAJOZ" value="BADAJOZ"/>
+	                                                        <value name="ILLES BALEARS" value="ILLES BALEARS"/>
+        	                                                <value name="BARCELONA" value="BARCELONA"/>
+                	                                        <value name="BURGOS" value="BURGOS"/>
+                        	                                <value name="CACERES" value="CACERES"/>
+                                	                        <value name="CADIZ" value="CADIZ"/>
+                                        	                <value name="CASTELLON" value="CASTELLON"/>
+                                                	        <value name="CIUDAD REAL" value="CIUDAD REAL"/>
+	                                                        <value name="CORDOBA" value="CORDOBA"/>
+        	                                                <value name="CORUÑA, A" value="CORUÑA, A"/>
+                	                                        <value name="CUENCA" value="CUENCA"/>
+                        	                                <value name="GIRONA" value="GIRONA"/>
+                                	                        <value name="GRANADA" value="GRANADA"/>
+	                                                        <value name="GUADALAJARA" value="GUADALAJARA"/>
+        	                                                <value name="GIPUZKOA" value="GIPUZKOA"/>
+                	                                        <value name="HUELVA" value="HUELVA"/>
+                        	                                <value name="HUESCA" value="HUESCA"/>
+                                	                        <value name="JAEN" value="JAEN"/>
+                                        	                <value name="LEON" value="LEON"/>
+	                                                        <value name="LLEIDA" value="LLEIDA"/>
+        	                                                <value name="RIOJA, LA" value="RIOJA, LA"/>
+                	                                        <value name="LUGO" value="LUGO"/>
+                        	                                <value name="MADRID" value="MADRID"/>
+                                	                        <value name="MALAGA" value="MALAGA"/>
+	                                                        <value name="MURCIA" value="MURCIA"/>
+        	                                                <value name="NAVARRA" value="NAVARRA"/>
+                	                                        <value name="OURENSE" value="OURENSE"/>
+                        	                                <value name="ASTURIAS" value="ASTURIAS"/>
+                                	                        <value name="PALENCIA" value="PALENCIA"/>
+                                        	                <value name="PALMAS, LAS" value="PALMAS, LAS"/>
+                                                	        <value name="PONTEVEDRA" value="PONTEVEDRA"/>
+	                                                        <value name="SALAMANCA" value="SALAMANCA"/>
+        	                                                <value name="SANTA CRUZ DE TENERIFE" value="SANTA CRUZ DE TENERIFE"/>
+                	                                        <value name="CANTABRIA" value="CANTABRIA"/>
+                        	                                <value name="SEGOVIA" value="SEGOVIA"/>
+	                                                        <value name="SEVILLA" value="SEVILLA"/>
+        	                                                <value name="SORIA" value="SORIA"/>
+                	                                        <value name="TARRAGONA" value="TARRAGONA"/>
+                        	                                <value name="TERUEL" value="TERUEL"/>
+                                	                        <value name="TOLEDO" value="TOLEDO"/>
+                                        	                <value name="VALENCIA" value="VALENCIA"/>
+                                                	        <value name="VALLADOLID" value="VALLADOLID"/>
+	                                                        <value name="BIZKAIA" value="BIZKAIA"/>
+        	                                                <value name="ZAMORA" value="ZAMORA"/>
+                	                                        <value name="ZARAGOZA" value="ZARAGOZA"/>
+                        	                                <value name="CEUTA" value="CEUTA"/>
+                                	                        <value name="MELILLA" value="MELILLA"/>
+							</values>
+                                                </field>
+					</fields>
+					<disclose />
+					<display_fields extends="contact_display_fields" />
+					<extra_fields />
+				</group>
+			</contact_groups>
+			
+			<contact_target_groups extends="contact_targets" />
+			
+			<contacts extends="contacts"/>
+		</config>
+	</section>
+
+
 	<section tlds="eu" name=".EU">
 		<ability>
-			<auto_renewal>1</auto_renewal>		
+			<auto_renewal>1</auto_renewal>
 		</ability>
 		<config>
 			<domain>
@@ -1471,8 +1675,7 @@
 								<value name="Applicants equivalent to points 2-6 but located outside of Italy" value="7"/>
 							</values>
 						</field>
-                                                <field iseditable="1" description="Place of Birth" type="select" name="Trademark" required="1" minlength="2" maxlength="2" pattern="/^[A-Za-z]{2}$/
-">
+                                                <field iseditable="1" description="Place of Birth" type="select" name="Trademark" required="1" minlength="2" maxlength="2" pattern="/^[A-Za-z]{2}$/">
                                                         <database table="countries" value_field="code" name_field="name" />
                                                 </field>
 					</fields>
@@ -1711,7 +1914,7 @@
                                         <fields extends="us_extra_fields">
                                                 <field iseditable="1" description="Full name" type="text" name="Name" required="1" minlength="1" maxlength="255" />
                                                 <field iseditable="1" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
-                                                <field iseditable="1" description="Organisation Number" type="text" name="RegistrantNumber" required="1" minlength="1" maxlength="60" />
+                                                <field iseditable="1" description="Organisation/Passport Number" type="text" name="RegistrantNumber" required="1" minlength="1" maxlength="60" />
                                                 <field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
@@ -1734,7 +1937,7 @@ a-zA-Z0-9\-\.]+$/" />
 						<field iseditable="1" description="First name" type="text" name="FirstName" required="1" minlength="1" maxlength="60" />
 						<field iseditable="1" description="Last name" type="text" name="LastName" required="1" minlength="1" maxlength="60" />
 						<field iseditable="1" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
-						<field iseditable="1" description="Organisation Number" type="text" name="OrganisationNumber" required="1" minlength="1" maxlength="60" />
+						<field iseditable="1" description="Organisation/Passport Number" type="text" name="OrganisationNumber" required="1" minlength="1" maxlength="60" />
 						<field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
 						<field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
 						<field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
@@ -1779,7 +1982,7 @@ a-zA-Z0-9\-\.]+$/" />
                                         <fields extends="us_extra_fields">
                                                 <field iseditable="1" description="Full name" type="text" name="Name" required="1" minlength="1" maxlength="255" />
                                                 <field iseditable="1" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
-                                                <field iseditable="1" description="Organisation Number" type="text" name="RegistrantNumber" required="1" minlength="1" maxlength="60" />
+                                                <field iseditable="1" description="Organisation/Passport Number" type="text" name="RegistrantNumber" required="1" minlength="1" maxlength="60" />
                                                 <field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
@@ -1802,7 +2005,7 @@ a-zA-Z0-9\-\.]+$/" />
 						<field iseditable="1" description="First name" type="text" name="FirstName" required="1" minlength="1" maxlength="60" />
 						<field iseditable="1" description="Last name" type="text" name="LastName" required="1" minlength="1" maxlength="60" />
 						<field iseditable="1" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
-						<field iseditable="1" description="Organisation Number" type="text" name="OrganisationNumber" required="1" minlength="1" maxlength="60" />
+						<field iseditable="1" description="Organisation/Passport Number" type="text" name="OrganisationNumber" required="1" minlength="1" maxlength="60" />
 						<field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
 						<field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
 						<field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
