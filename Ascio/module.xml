@@ -150,8 +150,6 @@
 		<min_period>1</min_period>
 		<max_period>10</max_period>
 		<notifications>
-			<period>60</period>
-			<period>30</period>
 			<period>20</period>
 			<period>10</period>
 			<period>5</period>
