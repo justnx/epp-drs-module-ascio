@@ -1136,9 +1136,9 @@
 		 * 
 		 * @see http://aws.ascio.info/docs/AWSReference-2.0.8.pdf 8.3 GetOrder
 		 */
-		// TODO: Durch korrekte Params ersetzen
-		const TRANSFERSTATUS_CANCELLED = 2;
-		const TRANSFERSTATUS_COMPLETE = 3;
+		const TRANSFERSTATUS_FAILED = 'Failed';
+		const TRANSFERSTATUS_INVALID = 'Invalid';
+		const TRANSFERSTATUS_COMPLETE = 'Completed';
 		
 		/**
 		 * Called by system when domain transfer operation is pending.
@@ -1151,21 +1151,19 @@
 		public function PollTransfer (Domain $domain)
 		{
 			$params = array(
-				//'DomainName' => $this->MakeNameIDNCompatible($domain->Name.'.'.$domain->Extension),
 				'orderId' => $domain->TransferID);
 
 			$Resp = $this->Request('GetOrder', $params);
 			
 			if ($Resp->Succeed)
 			{
-				// TODO: Durch richtiges Objekt ersetzen
-				$statusid = (int)$Resp->Data->transferorder->statusid;
+				$statusid = (string)$Resp->Data->order->Status;
 
 				if ($statusid == self::TRANSFERSTATUS_COMPLETE)
 				{
 					$tstatus = TRANSFER_STATUS::APPROVED;
 				}
-				else if ($statusid == self::TRANSFERSTATUS_CANCELLED)
+				else if ($statusid == self::TRANSFERSTATUS_FAILED || $statusid == self::TRANSFERSTATUS_INVALID)
 				{
 					$tstatus = TRANSFER_STATUS::DECLINED;
 				}
