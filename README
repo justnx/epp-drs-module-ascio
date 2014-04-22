@@ -19,6 +19,7 @@ ADDED
 * module.xml: .IT Domain Option fields extended
 * TLD: ES
 * Default: Fill Options Field with NewRegistrant for Owner Change on transfer
+* TransferDomain/TransferPollDomain fully implemented
 
 FIXED
 
@@ -33,6 +34,4 @@ FIXED
 
 TODO
 
-* Test TransferDomain/TransferPollDomain
 * Test Change Domain Owner
-* Test Transfer Domain
