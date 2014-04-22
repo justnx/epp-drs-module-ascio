@@ -123,7 +123,7 @@
 			</values>
 		</field>
 	</define>
-	
+
 	<define name="domain_transfer">
 		<pending_status></pending_status>
 		<allow>1</allow>
@@ -135,7 +135,7 @@
 		<contacts />
 		<update_contacts>1</update_contacts>
 	</define>
-	
+
 	<define name="domain_transfer_not_allowed">
 		<pending_status></pending_status>
 		<allow>0</allow>
@@ -145,7 +145,7 @@
 		<contacts />
 		<update_contacts>0</update_contacts>
 	</define>
-	
+
 	<define name="domain_renewal">
 		<min_period>1</min_period>
 		<max_period>10</max_period>
@@ -175,7 +175,7 @@
 		<field iseditable="1" description="Phone" type="phone" registry_format="+[2].[4-16]" name="Phone" required="1" />
 		<field iseditable="1" description="Fax" type="phone" registry_format="+[2].[4-16]" name="Fax" required="0" />
 	</define>
-	
+
 	<define name="contact_fields">
 		<field iseditable="1" description="First name" type="text" name="FirstName" required="1" minlength="1" maxlength="60" />
 		<field iseditable="1" description="Last name" type="text" name="LastName" required="1" minlength="1" maxlength="60" />
@@ -1468,7 +1468,7 @@
 					<fields extends="es_registrant_extra_fields">
                                                 <field iseditable="1" description="Full name" type="text" name="Name" required="1" minlength="1" maxlength="255" />
                                                 <field iseditable="1" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
-                                                <field iseditable="1" description="Organisation/Passport Number" type="text" name="RegistrantNumber" required="1" minlength="1" maxlength="60" />
+                                                <field iseditable="1" description="NIF/NIE Number" type="text" name="RegistrantNumber" required="1" minlength="1" maxlength="60" />
                                                 <field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
