@@ -96,8 +96,8 @@
 
 	    	$params = array( 'order' => array(
 			'Type' => 'Update_AuthInfo',
-			'Domain' => array(
 			'Comment' => 'EPP-DRS Update Authcode',
+			'Domain' => array(
 			'DomainName' => $this->MakeNameIDNCompatible($domain->Name.'.'.$domain->Extension),
 	    		'AuthInfo' => $authCode
 	    	)));
@@ -602,8 +602,8 @@
 		{
 			$params = array( 'order' => array(
 				'Type' => 'Renew_Domain',
-				'Domain' => array(
 				'Comments' => 'EPP-DRS Renew Order',
+				'Domain' => array(
 				'DomainName' => $this->MakeNameIDNCompatible($domain->Name.'.'.$domain->Extension),
 				'RegPeriod' => $extra['period']
 			)));
@@ -635,8 +635,9 @@
 
 			$params = array( 'order' => array(
 				'Type' => 'Transfer_Domain',
-				'Domain' => array(
 				'Comments' => 'EPP-DRS Transfer Order',
+                                'Options' => 'NewRegistrant',
+				'Domain' => array(
 				'DomainName' => $this->MakeNameIDNCompatible($domain->Name.'.'.$domain->Extension),
 				'Registrant' =>  array('Handle' => $contact_list[CONTACT_TYPE::REGISTRANT]->CLID),
 				'AdminContact' => array('Handle' => $contact_list[CONTACT_TYPE::ADMIN]->CLID),
@@ -657,6 +658,8 @@
                         // TLD specific extra fields
                         $params = array_merge($params, $extra);
 
+//echo '<pre>',print_r($params),'</pre>';
+//break;
 			$Resp = $this->Request('CreateOrder', $params);
 
                         $status = $Resp->Succeed ? REGISTRY_RESPONSE_STATUS::PENDING : REGISTRY_RESPONSE_STATUS::FAILED;
