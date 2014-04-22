@@ -356,9 +356,6 @@
 				return $Ret;
 			}
 			$Ret = new GetRemoteDomainResponse(REGISTRY_RESPONSE_STATUS::SUCCESS, $Resp->ErrMsg, $Resp->Code);
-			// TODO: Testing, fixes Update Status Transfered bug?
-                        //$Ret->CLID = (string)$Resp->Data->domain->Registrant->{'Handle'};
-                        //$Ret->CRID = (string)$Resp->Data->domain->{'DomainHandle'};
 			$Ret->CLID = $this->GetRegistrarID();
 			$Ret->CRID = $Ret->CLID;
                         $Ret->ExpireDate = strtotime($Resp->Data->domain->{'ExpDate'});
@@ -666,7 +663,7 @@
                         $Ret = new TransferRequestResponse($status, $Resp->ErrMsg, $Resp->Code);
                         $Ret->Result = $status != REGISTRY_RESPONSE_STATUS::FAILED;
 			$Ret->TransferID = $Resp->Data->order->OrderId;
-			$Ret->OperationId = $Resp->Data->order->OrderId;
+			//$Ret->OperationId = $Resp->Data->order->OrderId;
 
                         return $Ret;
 		}
