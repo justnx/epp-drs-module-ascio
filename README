@@ -11,12 +11,14 @@ NOTES
 ADDED
 
 * Registrant type template Full Name modules.xml integrated
-* Locked Name/Org for registrant contacts in modules.xml
+* Locked Name/Org for registrant contacts in module.xml
 * Delete User (delete registrant User)
 * GetRemoteContact
 * Polling tasks for different order types
 * Write pendingid to polling queue and check status of polling tasks
-* modules.xml: IT Domain Option fields extended
+* module.xml: .IT Domain Option fields extended
+* TLD: ES
+* Default: Fill Options Field with NewRegistrant for Owner Change on transfer
 
 FIXED
 
@@ -27,6 +29,7 @@ FIXED
 * Write orderid to db table: domains data
 * Fix for update Status Delegated -> Trasfered bug
 * TransferDomain/TransferPollDomain
+* Order comments fixes
 
 TODO
 
