@@ -495,7 +495,7 @@
 
 	<define name="es_registrant_extra_fields">
 		<!-- required if CountryCode=ES -->
-		<field iseditable="1" description="Spanish province" type="select" name="State" required="1">
+		<field iseditable="1" description="Spanish province" type="select" name="State" required="0">
 			<values>
 				<value name="Non Spain" value=""/>
 				<value name="ARABA" value="ARABA"/>
@@ -597,7 +597,7 @@
 	</define>
 	<define name="es_contact_extra_fields">
 		<!-- required if CountryCode=ES -->
-		<field iseditable="1" description="Spanish province" type="select" name="State" required="1">
+		<field iseditable="1" description="Spanish province" type="select" name="State" required="0">
 			<values>
 				<value name="Non Spain" value=""/>
 				<value name="ARABA" value="ARABA"/>
@@ -656,8 +656,8 @@
 		</field>
 		<field type="select" name="Type" description="Contact Type" required="1" iseditable="1">
 			<values>
-				<value name="Individual non Company" value="0"/>
-				<value name="Company located outside Spain" value="1"/>
+				<value name="Individual non Company" value="1"/>
+				<value name="Company located outside Spain" value="0"/>
 			</values>
 		</field>
 	</define>
@@ -1470,7 +1470,8 @@
                                                 <field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
-                                                <field iseditable="1" description="State" type="text" name="State" required="1" minlength="2" maxlength="60"></field>
+						<!-- required if CountryCode=ES -->
+                                                <field iseditable="1" description="State" type="text" name="State" required="0" minlength="2" maxlength="60"></field>
                                                 <field iseditable="1" description="Postal code" type="text" name="PostalCode" required="1" minlength="2" maxlength="60" />
                                                 <field iseditable="1" description="CountryCode" type="select" name="CountryCode" required="1" minlength="2" maxlength="2" pattern="/^[A-Za-z]{2}$/">
                                                         <database table="countries" value_field="code" name_field="name" />
@@ -1492,7 +1493,8 @@
                                                 <field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
-                                                <field iseditable="1" description="State" type="text" name="State" required="1" minlength="2" maxlength="60"></field>
+						<!-- required if CountryCode=ES -->
+                                                <field iseditable="1" description="State" type="text" name="State" required="0" minlength="2" maxlength="60"></field>
                                                 <field iseditable="1" description="Postal code" type="text" name="PostalCode" required="1" minlength="2" maxlength="60" />
                                                 <field iseditable="1" description="CountryCode" type="select" name="CountryCode" required="1" minlength="2" maxlength="2" pattern="/^[A-Za-z]{2}$/">
                                                         <database table="countries" value_field="code" name_field="name" />
