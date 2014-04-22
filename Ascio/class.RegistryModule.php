@@ -96,7 +96,7 @@
 
 	    	$params = array( 'order' => array(
 			'Type' => 'Update_AuthInfo',
-			'Comment' => 'EPP-DRS Update Authcode',
+			'Comments' => 'EPP-DRS Update Authcode',
 			'Domain' => array(
 			'DomainName' => $this->MakeNameIDNCompatible($domain->Name.'.'.$domain->Extension),
 	    		'AuthInfo' => $authCode
