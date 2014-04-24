@@ -34,7 +34,11 @@
 				"Email",
 				"Phone",
 				"Fax",
-				"OrganisationNumber"
+				"OrganisationNumber",
+				"RegistrantNumber",
+				"RegistrantType",
+				"Type",
+				"Trademark"
                         	);
 
 			$prefix = $this->contact_type_prefix_map[$as_type];
@@ -663,7 +667,7 @@
                         $Ret = new TransferRequestResponse($status, $Resp->ErrMsg, $Resp->Code);
                         $Ret->Result = $status != REGISTRY_RESPONSE_STATUS::FAILED;
 			$Ret->TransferID = $Resp->Data->order->OrderId;
-			//$Ret->OperationId = $Resp->Data->order->OrderId;
+			$Ret->OperationId = $Resp->Data->order->OrderId;
 
                         return $Ret;
 		}
@@ -1009,20 +1013,21 @@
                         	}
                         	else
                         	{
-                                	return new PollCreateDomainResponse(
-                                        	REGISTRY_RESPONSE_STATUS::FAILED,
-                                        	$Resp->ErrMsg,
-                                        	$Resp->Code
-                                	);
+                                $Ret = new PollCreateDomainResponse(REGISTRY_RESPONSE_STATUS::SUCCESS);
+                                $Ret->HostName = $domain->GetHostName();
+                                $Ret->Result = false;
+                                $Ret->FailReason = _("Domain registration declined by registry");
+                                return $Ret;
                         	}
                 	}
                 	catch (ObjectNotExistsException $e)
                 	{
-                        	$Ret = new PollCreateDomainResponse(REGISTRY_RESPONSE_STATUS::SUCCESS);
-                        	$Ret->HostName = $domain->GetHostName();
-                        	$Ret->Result = false;
-                        	$Ret->FailReason = _("Domain registration declined by registry");
-                        	return $Ret;
+				return new PollCreateDomainResponse(
+					REGISTRY_RESPONSE_STATUS::FAILED,
+					$Resp->Data->GetOrderResult->Message,
+					$Resp->Data->GetOrderResult->ResultCode
+				);
+
                 	}
         	}
 		/**
@@ -1066,22 +1071,22 @@
                                 }
                                 else
                                 {
-                                        return new PollDeleteDomainResponse(
-                                                REGISTRY_RESPONSE_STATUS::FAILED,
-                                                $Resp->ErrMsg,
-                                                $Resp->Code
-                                        );
+                                	$Ret = new PollDeleteDomainResponse(REGISTRY_RESPONSE_STATUS::SUCCESS);
+                                	$Ret->HostName = $domain->GetHostName();
+                                	$Ret->Result = false;
+                                	$Ret->FailReason = _("Domain deletion declined by registry");
+                                	return $Ret;
                                 }
                         }
                         catch (ObjectNotExistsException $e)
                         {
-                                $Ret = new PollDeleteDomainResponse(REGISTRY_RESPONSE_STATUS::SUCCESS);
-                                $Ret->HostName = $domain->GetHostName();
-                                $Ret->Result = false;
-                                $Ret->FailReason = _("Domain deletion declined by registry");
-                                return $Ret;
+				return new PollDeleteDomainResponse(
+					REGISTRY_RESPONSE_STATUS::FAILED,
+					$Resp->Data->GetOrderResult->Message,
+					$Resp->Data->GetOrderResult->ResultCode
+				);
+
                         }
-	
 		}
 		
 		/**
@@ -1182,12 +1187,12 @@
 			{
 				return new PollTransferResponse(
 					REGISTRY_RESPONSE_STATUS::FAILED, 
-					$Resp->ErrMsg,
-					$Resp->Code
+					$Resp->Data->GetOrderResult->Message,
+					$Resp->Data->GetOrderResult->ResultCode
 				);
 			}
 		}
-		
+
 		/**
 		 * Called by system when update domain operation is pending.
 		 * Must return valid DomainUpdatedResponse on operatation is completed, 
@@ -1203,7 +1208,7 @@
                         	$params = array('orderId' => $this->GetPendingID(Registry::OBJ_DOMAIN, $domain->ID, Registry::OP_UPDATE));
                                 $Resp = $this->Request('GetOrder', $params);
                                 $rs = (string)$Resp->Data->order->Status;
-
+				
                                 if ($Resp->Succeed && $rs != 'Invalid' && $rs != 'Failed')
                                 {
 					if ($rs != 'Completed')
@@ -1226,21 +1231,21 @@
                                 }
                                 else
                                 {
-                                        return new PollUpdateDomainResponse(
-                                                REGISTRY_RESPONSE_STATUS::FAILED,
-                                                $Resp->ErrMsg,
-                                                $Resp->Code
-                                        );
+					$Ret = new PollUpdateDomainResponse(REGISTRY_RESPONSE_STATUS::SUCCESS);
+                                        $Ret->HostName = $domain->GetHostName();
+                                        $Ret->Result = false;
+                                        $Ret->FailReason = _("Domain Update declined by registry");
+                                        return $Ret;
                                 }
                         }
                         catch (ObjectNotExistsException $e)
                         {
-                                $Ret = new PollUpdateDomainResponse(REGISTRY_RESPONSE_STATUS::SUCCESS);
-                                $Ret->HostName = $domain->GetHostName();
-                                $Ret->Result = false;
-                                $Ret->FailReason = _("Domain Update declined by registry");
-                                return $Ret;
-                        }	
+				return new PollUpdateDomainResponse(
+                                                REGISTRY_RESPONSE_STATUS::FAILED,
+                                                $Resp->Data->GetOrderResult->Message,
+                                                $Resp->Data->GetOrderResult->ResultCode
+				);
+                        }
 		}
 
 		/**
@@ -1280,20 +1285,20 @@
                                 }
                                 else
                                 {
-                                        return new PollDeleteContactResponse(
-                                                REGISTRY_RESPONSE_STATUS::FAILED,
-                                                $Resp->ErrMsg,
-                                                $Resp->Code
-                                        );
+					$Ret = new PollDeleteContactResponse(REGISTRY_RESPONSE_STATUS::SUCCESS);
+                                	$Ret->Result = false;
+                                	$Ret->FailReason = _("Contact deletion declined by registry");
+                                	return $Ret;
                                 }
                         }
                         catch (ObjectNotExistsException $e)
                         {
-                                $Ret = new PollDeleteContactResponse(REGISTRY_RESPONSE_STATUS::SUCCESS);
-                                $Ret->Result = false;
-                                $Ret->FailReason = _("Contact deletion declined by registry");
-                                return $Ret;
-                        }	
+				return new PollDeleteContactResponse(
+					REGISTRY_RESPONSE_STATUS::FAILED,
+					$Resp->Data->GetOrderResult->Message,
+					$Resp->Data->GetOrderResult->ResultCode
+				);
+			}	
 		}
 		
 		/**
