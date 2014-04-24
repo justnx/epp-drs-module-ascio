@@ -1466,7 +1466,7 @@
 					<fields extends="es_registrant_extra_fields">
                                                 <field iseditable="1" description="Full name" type="text" name="Name" required="1" minlength="1" maxlength="255" />
                                                 <field iseditable="1" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
-                                                <field iseditable="1" description="NIF/NIE Number" type="text" name="RegistrantNumber" required="1" minlength="1" maxlength="60" />
+                                                <field iseditable="1" description="Organisation/NIF/NIE/Passport Number" type="text" name="RegistrantNumber" required="1" minlength="1" maxlength="60" />
                                                 <field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
@@ -1489,7 +1489,7 @@
                                                 <field iseditable="1" description="First name" type="text" name="FirstName" required="1" minlength="1" maxlength="60" />
                                                 <field iseditable="1" description="Last name" type="text" name="LastName" required="1" minlength="1" maxlength="60" />
                                                 <field iseditable="1" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
-                                                <field iseditable="1" description="Organisation/Passport Number" type="text" name="OrganisationNumber" required="1" minlength="1" maxlength="60" />
+                                                <field iseditable="1" description="Organisation/NIF/NIE/Passport Number" type="text" name="OrganisationNumber" required="1" minlength="1" maxlength="60" />
                                                 <field iseditable="1" description="Address 1" type="text" name="Address1" required="1" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="Address 2" type="text" name="Address2" required="0" minlength="3" maxlength="60" />
                                                 <field iseditable="1" description="City" type="text" name="City" required="1" minlength="2" maxlength="60" />
