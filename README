@@ -20,6 +20,7 @@ ADDED
 * TLD: ES
 * Default: Fill Options Field with NewRegistrant for Owner Change on transfer
 * TransferDomain/TransferPollDomain fully implemented
+* Added german umlauts fix
 
 FIXED
 
