@@ -78,6 +78,22 @@
 			return $Form;
 		}
 
+	     /**
+             * Converts german umlauts into registry readable characters.
+             * @return array
+             */
+		public static function germumlauts($contactarray)
+		{
+			$geruml1 = array("ä", "ö", "ü", "Ä", "Ö", "Ü", "ß");
+			$geruml2 = array("ae", "oe", "ue", "Ae", "Oe", "Ue", "ss");
+
+			foreach ($contactarray as $key => $value){
+   			$contactarray[$key]  = str_replace($geruml1, $geruml2, $value);
+			}
+
+			return $contactarray;
+		}
+
                 /**
                  * Must return current Registrar ID (CLID). Generally, you can return registrar login here.
                  * Used in transfer and some contact operations to determine either object belongs to current registrar.
@@ -356,10 +372,10 @@
 			$Resp = $this->Request('GetDomain', $params);
 			if (!$Resp->Succeed)
 			{
-				$Ret = new GetRemoteDomainResponse(REGISTRY_RESPONSE_STATUS::FAILED, $Resp->ErrMsg, $Resp->Code);
+				$Ret = new GetRemoteDomainResponse(REGISTRY_RESPONSE_STATUS::FAILED, $Resp->Data->GetDomainResult->Message, $Resp->Data->GetDomainResult->ResultCode);
 				return $Ret;
 			}
-			$Ret = new GetRemoteDomainResponse(REGISTRY_RESPONSE_STATUS::SUCCESS, $Resp->ErrMsg, $Resp->Code);
+			$Ret = new GetRemoteDomainResponse(REGISTRY_RESPONSE_STATUS::SUCCESS, $Resp->Data->GetDomainResult->Message, $Resp->Data->GetDomainResult->ResultCode);
 			$Ret->CLID = $this->GetRegistrarID();
 			$Ret->CRID = $Ret->CLID;
                         $Ret->ExpireDate = strtotime($Resp->Data->domain->{'ExpDate'});
@@ -488,7 +504,7 @@
 			$Resp = $this->Request('CreateOrder', $params);
 
                         $status = $Resp->Succeed ? REGISTRY_RESPONSE_STATUS::PENDING : REGISTRY_RESPONSE_STATUS::FAILED;
-                        $Ret = new UpdateDomainContactResponse($status, $Resp->ErrMsg, $Resp->Code);
+                        $Ret = new UpdateDomainContactResponse($status, $Resp->Data->CreateOrder->Message, $Resp->Data->CreateOrder->ResultCode);
                         $Ret->Result = $status != REGISTRY_RESPONSE_STATUS::FAILED;
                         $Ret->OperationId = $Resp->Data->order->OrderId;
 
@@ -532,7 +548,7 @@
 			$Resp = $this->Request('CreateOrder', $params);
 
                         $status = $Resp->Succeed ? REGISTRY_RESPONSE_STATUS::PENDING : REGISTRY_RESPONSE_STATUS::FAILED;
-                        $Ret = new UpdateDomainNameserversResponse($status, $Resp->ErrMsg, $Resp->Code);
+                        $Ret = new UpdateDomainNameserversResponse($status, $Resp->Data->CreateOrderResult->Message, $Resp->Data->CreateOrderResult->ResultCode);
                         $Ret->Result = $status != REGISTRY_RESPONSE_STATUS::FAILED;
                         $Ret->OperationId = $Resp->Data->order->OrderId;
 
@@ -659,12 +675,10 @@
                         // TLD specific extra fields
                         $params = array_merge($params, $extra);
 
-//echo '<pre>',print_r($params),'</pre>';
-//break;
 			$Resp = $this->Request('CreateOrder', $params);
 
                         $status = $Resp->Succeed ? REGISTRY_RESPONSE_STATUS::PENDING : REGISTRY_RESPONSE_STATUS::FAILED;
-                        $Ret = new TransferRequestResponse($status, $Resp->ErrMsg, $Resp->Code);
+                        $Ret = new TransferRequestResponse($status, $Resp->Data->CreateOrderResult->Message, $Resp->Data->CreateOrderResult->ResultCode);
                         $Ret->Result = $status != REGISTRY_RESPONSE_STATUS::FAILED;
 			$Ret->TransferID = $Resp->Data->order->OrderId;
 			$Ret->OperationId = $Resp->Data->order->OrderId;
@@ -855,8 +869,8 @@
 			if ($contact_type == "registrant"){
 			$packcontact_type = CONTACT_TYPE::REGISTRANT;
 			}
+				$params = $this->germumlauts($this->PackContact($contact, $packcontact_type));
 
-				$params = $this->PackContact($contact, $packcontact_type);
 				$Resp = $this->Request('Create'.ucfirst($contact_type), $params);
 				$status = $Resp->Succeed || $Resp->Data->$contact_type->Handle ? 
 				REGISTRY_RESPONSE_STATUS::SUCCESS : REGISTRY_RESPONSE_STATUS::FAILED;
@@ -1227,6 +1241,7 @@
                                         {
                                                 $Ret->Result = false;
                                         }
+
                                         return $Ret;
                                 }
                                 else

@@ -498,6 +498,7 @@
 		<field iseditable="1" description="Spanish province" type="select" name="State" required="0">
 			<values>
 				<value name="Non Spain" value=""/>
+                                <value name="A CORUÑA" value="CORUÑA, A"/>
 				<value name="ARABA" value="ARABA"/>
 				<value name="ALBACETE" value="ALBACETE"/>
 				<value name="ALICANTE" value="ALICANTE"/>
@@ -512,7 +513,6 @@
 				<value name="CASTELLON" value="CASTELLON"/>
 				<value name="CIUDAD REAL" value="CIUDAD REAL"/>
 				<value name="CORDOBA" value="CORDOBA"/>
-				<value name="CORUÑA, A" value="CORUÑA, A"/>
 				<value name="CUENCA" value="CUENCA"/>
 				<value name="GIRONA" value="GIRONA"/>
 				<value name="GRANADA" value="GRANADA"/>
@@ -523,7 +523,8 @@
 				<value name="JAEN" value="JAEN"/>
 				<value name="LEON" value="LEON"/>
 				<value name="LLEIDA" value="LLEIDA"/>
-				<value name="RIOJA, LA" value="RIOJA, LA"/>
+				<value name="LA RIOJA" value="RIOJA, LA"/>
+                                <value name="LAS PALMAS" value="PALMAS, LAS"/>
 				<value name="LUGO" value="LUGO"/>
 				<value name="MADRID" value="MADRID"/>
 				<value name="MALAGA" value="MALAGA"/>
@@ -532,7 +533,6 @@
 				<value name="OURENSE" value="OURENSE"/>
 				<value name="ASTURIAS" value="ASTURIAS"/>
 				<value name="PALENCIA" value="PALENCIA"/>
-				<value name="PALMAS, LAS" value="PALMAS, LAS"/>
 				<value name="PONTEVEDRA" value="PONTEVEDRA"/>
 				<value name="SALAMANCA" value="SALAMANCA"/>
 				<value name="SANTA CRUZ DE TENERIFE" value="SANTA CRUZ DE TENERIFE"/>
@@ -600,6 +600,7 @@
 		<field iseditable="1" description="Spanish province" type="select" name="State" required="0">
 			<values>
 				<value name="Non Spain" value=""/>
+                                <value name="A CORUÑA" value="CORUÑA, A"/>
 				<value name="ARABA" value="ARABA"/>
 				<value name="ALBACETE" value="ALBACETE"/>
 				<value name="ALICANTE" value="ALICANTE"/>
@@ -614,7 +615,6 @@
 				<value name="CASTELLON" value="CASTELLON"/>
 				<value name="CIUDAD REAL" value="CIUDAD REAL"/>
 				<value name="CORDOBA" value="CORDOBA"/>
-				<value name="CORUÑA, A" value="CORUÑA, A"/>
 				<value name="CUENCA" value="CUENCA"/>
 				<value name="GIRONA" value="GIRONA"/>
 				<value name="GRANADA" value="GRANADA"/>
@@ -623,9 +623,10 @@
 				<value name="HUELVA" value="HUELVA"/>
 				<value name="HUESCA" value="HUESCA"/>
 				<value name="JAEN" value="JAEN"/>
+                                <value name="LA RIOJA" value="RIOJA, LA"/>
+                                <value name="LAS PALMAS" value="PALMAS, LAS"/>
 				<value name="LEON" value="LEON"/>
 				<value name="LLEIDA" value="LLEIDA"/>
-				<value name="RIOJA, LA" value="RIOJA, LA"/>
 				<value name="LUGO" value="LUGO"/>
 				<value name="MADRID" value="MADRID"/>
 				<value name="MALAGA" value="MALAGA"/>
@@ -634,7 +635,6 @@
 				<value name="OURENSE" value="OURENSE"/>
 				<value name="ASTURIAS" value="ASTURIAS"/>
 				<value name="PALENCIA" value="PALENCIA"/>
-				<value name="PALMAS, LAS" value="PALMAS, LAS"/>
 				<value name="PONTEVEDRA" value="PONTEVEDRA"/>
 				<value name="SALAMANCA" value="SALAMANCA"/>
 				<value name="SANTA CRUZ DE TENERIFE" value="SANTA CRUZ DE TENERIFE"/>
@@ -1462,7 +1462,7 @@
 			</domain>
 			
 			<contact_groups>
-				<group name="registrant" assoc_with_domain="1" title="Registrant (Any)" target-group="all">
+				<group name="registrant" assoc_with_domain="0" title="Registrant (Any)" target-group="all">
 					<fields extends="es_registrant_extra_fields">
                                                 <field iseditable="1" description="Full name" type="text" name="Name" required="1" minlength="1" maxlength="255" />
                                                 <field iseditable="1" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" />
@@ -1674,7 +1674,7 @@
 			</domain>
 			
 			<contact_groups>
-				<group name="registrant" assoc_with_domain="1" title="Registrant (Any)" target-group="all">
+				<group name="registrant" assoc_with_domain="0" title="Registrant (Any)" target-group="all">
 					<fields extends="registrant_fields">
 						<field type="select" name="RegistrantType" description="Registrant Type" required="1"  iseditable="1">
 							<values>
