@@ -1,7 +1,9 @@
-Ascio EPP-DRS Module
+EPP-DRS Module for Ascio Registrar
 =======
 
 [API Reference Documentation](http://aws.ascio.info/docs/AWSReference-2.0.8.pdf)
+[Author: Julian Sternberg]
+[Github](https://github.com/justnx)
 
 NOTES
 
@@ -16,9 +18,9 @@ ADDED
 * GetRemoteContact
 * Polling tasks for different order types
 * Write pendingid to polling queue and check status of polling tasks
-* module.xml: .IT Domain Option fields extended
+* module.xml: .IT domain option fields extended
 * TLD: ES
-* Default: Fill Options Field with NewRegistrant for Owner Change on transfer
+* Default: Fill options field with NewRegistrant for Owner Change on transfer
 * TransferDomain/TransferPollDomain fully implemented
 * Added german umlauts fix
 
@@ -36,4 +38,4 @@ FIXED
 
 TODO
 
-* Test Change Domain Owner
+* Testing Change Domain Owner

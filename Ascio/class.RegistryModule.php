@@ -1,10 +1,11 @@
 <?php
 
                 /**
-                 * Ascio Registry Module for EPP-DRS
+                 * EPP-DRS module for Ascio Registrar
                  *
                  * API description: http://aws.ascio.info
                  *
+                 * Author: Julian Sternberg
                  * Github: https://github.com/justnx
                  *
                  */
@@ -13,10 +14,14 @@
 	{
 
 		private $contact_type_prefix_map = array(
+			//CONTACT_TYPE::ADMIN => 'AdminContact',
+			//CONTACT_TYPE::TECH => 'TechContact',
+			//CONTACT_TYPE::BILLING => 'BillingContact',
+			//CONTACT_TYPE::REGISTRANT => 'Registrant',
 			CONTACT_TYPE::ADMIN => 'contact',
-			CONTACT_TYPE::TECH => 'contact',
-			CONTACT_TYPE::BILLING => 'contact',
-			CONTACT_TYPE::REGISTRANT => 'registrant',
+                        CONTACT_TYPE::TECH => 'contact',
+                        CONTACT_TYPE::BILLING => 'contact',
+                        CONTACT_TYPE::REGISTRANT => 'registrant',
 		);
 
 		private function PackContact (Contact $Contact, $as_type)
@@ -452,8 +457,8 @@
 		public function UpdateDomainContact(Domain $domain, $contactType, Contact $oldContact, Contact $newContact)
 		{
 
-			$contact_list = $domain->GetContactList();
-			$params = array( 'order' => array(
+                        $contact_list = $domain->GetContactList();
+                        $params = array( 'order' => array(
                                 'Comments' => 'EPP-DRS Contact Update Order',
                                 'Domain' => array(
                                 'DomainName' => $this->MakeNameIDNCompatible($domain->Name.'.'.$domain->Extension),
@@ -461,44 +466,38 @@
                                 'AdminContact' => array('Handle' => $contact_list[CONTACT_TYPE::ADMIN]->CLID),
                                 'TechContact' => array('Handle' => $contact_list[CONTACT_TYPE::TECH]->CLID),
                                 'BillingContact' => array('Handle' => $contact_list[CONTACT_TYPE::BILLING]->CLID),
-				)));
+				'Trademark' =>  array('Country' => $contact_list[CONTACT_TYPE::REGISTRANT]->ExtraStoredData['Trademark']),
+                                )));
 
-               		switch($contactType)
-                	{
-                        	case CONTACT_TYPE::REGISTRANT:
-                                	$params['order']['Domain']['Registrant']['Handle'] = $newContact->CLID;
-                                	if ($oldContact)
-                                        	$params['order']['Domain']['Registrant']['Handle'] = $oldContact->CLID;
-                                	break;
+                         switch($contactType)
+                        {
+                                case CONTACT_TYPE::REGISTRANT:
+						unset($params['order']['Domain']['AdminContact']);
+						unset($params['order']['Domain']['BillingContact']);
+						unset($params['order']['Domain']['TechContact']);
+                                                $params['order']['Domain']['Registrant']['Handle'] = $newContact->CLID;
+                                        break;
 
-                        	case CONTACT_TYPE::ADMIN:
-                                	$params['order']['Domain']['AdminContact']['Handle'] = $newContact->CLID;
-                                	if ($oldContact)
-                                        	$params['order']['Domain']['AdminContact']['Handle'] = $oldContact->CLID;
-                                	break;
+                                case CONTACT_TYPE::ADMIN:
+                                                $params['order']['Domain']['AdminContact']['Handle'] = $newContact->CLID;
+                                        break;
 
-                        	case CONTACT_TYPE::BILLING:
-                                	$params['order']['Domain']['BillingContact']['Handle'] = $newContact->CLID;
-                                	if ($oldContact)
-                                        	$params['order']['Domain']['BillingContact']['Handle'] = $oldContact->CLID;
-                                	break;
+                                case CONTACT_TYPE::BILLING:
+                                                $params['order']['Domain']['BillingContact']['Handle'] = $newContact->CLID;
+                                        break;
 
-                        	case CONTACT_TYPE::TECH:
-                                	$params['order']['Domain']['TechContact']['Handle'] = $newContact->CLID;
-                                	if ($oldContact)
-                                        	$params['order']['Domain']['TechContact']['Handle'] = $oldContact->CLID;
-                                	break;
-                	}
+                                case CONTACT_TYPE::TECH:
+                                                $params['order']['Domain']['TechContact']['Handle'] = $newContact->CLID;
+                                        break;
+                        }
+
 
 			if ($contactType == CONTACT_TYPE::REGISTRANT)
 			{
-					unset($params['order']['Domain']['AdminContact']);
-					unset($params['order']['Domain']['BillingContact']);
-					unset($params['order']['Domain']['TechContact']);
-				        $params['order']['Type'] = 'Owner_Change';
+				$params['order']['Type'] = 'Owner_Change';
 			} else {
-					unset($params['order']['Domain']['Registrant']);
-					$params['order']['Type'] = 'Contact_Update';
+				unset($params['order']['Domain']['Registrant']);
+				$params['order']['Type'] = 'Contact_Update';
 			}
 
 			$Resp = $this->Request('CreateOrder', $params);
@@ -508,7 +507,7 @@
                         $Ret->Result = $status != REGISTRY_RESPONSE_STATUS::FAILED;
                         $Ret->OperationId = $Resp->Data->order->OrderId;
 
-			return $Ret;		
+			return $Ret;
 		}
 		
 		/**
@@ -930,7 +929,7 @@
 
 			$params[$contact_type]['Handle'] = $contact->CLID;
 
-			// If contact Group == registrant, remove Name/Org from array and use Registrant_Details_Update instead of UpdateContact
+			// If contact Group == registrant, remove Name/Org from array and use Registrant_Details_Update instead of Contact_Update
 			if ($contact_type == "registrant"){
                         unset($params['registrant']['Name']);
                         unset($params['registrant']['OrgName']);
@@ -945,7 +944,8 @@
                         )));
 			$Resp = $this->Request('CreateOrder', $paramsRegistrant);
 			} else {
-			$Resp = $this->Request('UpdateContact', $params);
+			//$Resp = $this->Request('UpdateContact', $params);
+			$Resp = $this->Request('Contact_Update', $params);
 			}
 
                         $status = $Resp->Succeed ? REGISTRY_RESPONSE_STATUS::PENDING : REGISTRY_RESPONSE_STATUS::FAILED;
@@ -1022,6 +1022,7 @@
                                 	else if ($rs != 'PENDING')
                                 	{
                                         	$Ret->Result = false;
+						$Ret->FailReason = $Resp->Data->GetOrderResult->Message;
                                 	}
                                 	return $Ret;
                         	}
@@ -1030,7 +1031,7 @@
                                 $Ret = new PollCreateDomainResponse(REGISTRY_RESPONSE_STATUS::SUCCESS);
                                 $Ret->HostName = $domain->GetHostName();
                                 $Ret->Result = false;
-                                $Ret->FailReason = _("Domain registration declined by registry");
+                                $Ret->FailReason = $Resp->Data->GetOrderResult->Message; // _("Domain registration declined by registry");
                                 return $Ret;
                         	}
                 	}
@@ -1080,6 +1081,7 @@
                                         else if ($rs != 'PENDING')
                                         {
                                                 $Ret->Result = false;
+						$Ret->FailReason = $Resp->Data->GetOrderResult->Message;
                                         }
                                         return $Ret;
                                 }
@@ -1088,7 +1090,7 @@
                                 	$Ret = new PollDeleteDomainResponse(REGISTRY_RESPONSE_STATUS::SUCCESS);
                                 	$Ret->HostName = $domain->GetHostName();
                                 	$Ret->Result = false;
-                                	$Ret->FailReason = _("Domain deletion declined by registry");
+                                	$Ret->FailReason = $Resp->Data->GetOrderResult->Message; // _("Domain deletion declined by registry");
                                 	return $Ret;
                                 }
                         }
@@ -1190,8 +1192,8 @@
 				
 				$Ret = new PollTransferResponse(
 					$tstatus != TRANSFER_STATUS::PENDING ? REGISTRY_RESPONSE_STATUS::SUCCESS : REGISTRY_RESPONSE_STATUS::PENDING, 
-					$Resp->ErrMsg, 
-					$Resp->Code
+					$Resp->Data->GetOrderResult->Message, 
+					$Resp->Data->GetOrderResult->ResultCode
 				);
 				$Ret->HostName = $domain->GetHostName();
 				$Ret->TransferStatus = $tstatus;
@@ -1240,6 +1242,7 @@
                                         else if ($rs != 'PENDING')
                                         {
                                                 $Ret->Result = false;
+						$Ret->FailReason = $Resp->Data->GetOrderResult->Message;
                                         }
 
                                         return $Ret;
@@ -1249,7 +1252,7 @@
 					$Ret = new PollUpdateDomainResponse(REGISTRY_RESPONSE_STATUS::SUCCESS);
                                         $Ret->HostName = $domain->GetHostName();
                                         $Ret->Result = false;
-                                        $Ret->FailReason = _("Domain Update declined by registry");
+                                        $Ret->FailReason = $Resp->Data->GetOrderResult->Message; //_("Domain Update declined by registry");
                                         return $Ret;
                                 }
                         }
@@ -1295,6 +1298,7 @@
                                         else if ($rs != 'PENDING')
                                         {
                                                 $Ret->Result = false;
+						$Ret->FailReason = $Resp->Data->GetOrderResult->Message;
                                         }
                                         return $Ret;
                                 }
@@ -1302,7 +1306,7 @@
                                 {
 					$Ret = new PollDeleteContactResponse(REGISTRY_RESPONSE_STATUS::SUCCESS);
                                 	$Ret->Result = false;
-                                	$Ret->FailReason = _("Contact deletion declined by registry");
+                                	$Ret->FailReason = $Resp->Data->GetOrderResult->Message; //_("Contact deletion declined by registry");
                                 	return $Ret;
                                 }
                         }

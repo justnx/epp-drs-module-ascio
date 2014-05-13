@@ -1420,7 +1420,7 @@
 				</registration>
 		
 				<renewal extends="domain_renewal" />
-				<transfer extends="domain_transfer_not_allowed" />
+				<transfer extends="domain_transfer" />
 			</domain>
 			
 			<contact_groups>
@@ -1827,7 +1827,7 @@
 				</registration>
 		
 				<renewal extends="domain_renewal" />
-				<transfer extends="domain_transfer_not_allowed" />
+				<transfer extends="domain_transfer" />
 			</domain>
 			
 			<contact_groups>
