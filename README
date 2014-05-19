@@ -5,7 +5,11 @@ EPP-DRS Module for Ascio Registrar
 [Author: Julian Sternberg]
 [Github](https://github.com/justnx)
 
+<<<<<<< HEAD
 INSTALL NOTES
+=======
+NOTES
+>>>>>>> 27d00d0f3cfbac6a1b7d6152f3e64de3b3db4431
 
 * Very important is to set the date.timezone in php.ini, else ('Too quick to poll for #%s operation) will apear in Log all the time and request the remote registry.
   Polling will never or start to late! Reason: The 60 second check logic cannot check against time() call which is empty in that case.
