@@ -386,7 +386,7 @@
                         $Ret->ExpireDate = strtotime($Resp->Data->domain->{'ExpDate'});
                         $Ret->RegistryStatus = (string)$Resp->Data->domain->{'Status'};
 			$Ret->AuthCode = (string)$Resp->Data->domain->{'AuthInfo'};
-			$Ret->CreateDate = $cr_date ? $cr_date : strtotime("-1 year", $Ret->ExpireDate); 
+			$Ret->CreateDate = strtotime($Resp->Data->domain->{'CreDate'}); //$cr_date ? $cr_date : strtotime("-1 year", $Ret->ExpireDate); 
 			
 			// Get DNS
 			$n = 1;
