@@ -35,6 +35,7 @@ FIXED
 * TransferDomain/TransferPollDomain
 * Order comments fixes
 * ES TLD form updated
+* Fetch create date field on remote sync
 
 TODO
 
