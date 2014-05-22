@@ -84,18 +84,22 @@
 		}
 
 	     /**
-             * Converts german umlauts into registry readable characters.
+             * Converts umlauts/special characters into registry readable characters.
              * @return array
              */
-		public static function germumlauts($contactarray)
+		public static function umlauts($contactarray)
 		{
-			$geruml1 = array("ä", "ö", "ü", "Ä", "Ö", "Ü", "ß");
-			$geruml2 = array("ae", "oe", "ue", "Ae", "Oe", "Ue", "ss");
+
+			$uml1 = array('Š','š','Ž','ž','À','Á','Â','Ã','Ä','Å','Æ','Ç','È','É','Ê','Ë','Ì','Í','Î','Ï','Ñ','Ò','Ó','Ô','Õ','Ö','Ø','Ù',
+			'Ú','Û','Ü','Ý','Þ','ß','ä','à','á','â','ã','å','æ','ç','è','é','ê','ë','ì','í','î','ï','ð','ñ','ò','ó','ô','õ','ö','ø','ü',
+			'ù','ú','û','ý','ý','þ','ÿ');
+			$uml2 = array('S','s','Z','z','A','A','A','A','Ae','A','A','C','E','E','E','E','I','I','I','I','N','O','O','O','O','Oe','O',
+			'U','U','U','Ue','Y','B','ss','ae','a','a','a','a','a','a','c','e','e','e','e','i','i','i','i','o','n','o','o','o','oe','o',
+			'o','ue','u','u','u','y','y','b','y');
 
 			foreach ($contactarray as $key => $value){
-   			$contactarray[$key]  = str_replace($geruml1, $geruml2, $value);
+   			$contactarray[$key]  =  str_replace($uml1, $uml2, $value);
 			}
-
 			return $contactarray;
 		}
 
@@ -868,7 +872,7 @@
 			if ($contact_type == "registrant"){
 			$packcontact_type = CONTACT_TYPE::REGISTRANT;
 			}
-				$params = $this->germumlauts($this->PackContact($contact, $packcontact_type));
+				$params = $this->umlauts($this->PackContact($contact, $packcontact_type));
 
 				$Resp = $this->Request('Create'.ucfirst($contact_type), $params);
 				$status = $Resp->Succeed || $Resp->Data->$contact_type->Handle ? 
