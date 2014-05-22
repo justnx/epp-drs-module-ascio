@@ -27,6 +27,7 @@ ADDED
 * Default: Fill options field with NewRegistrant for Owner Change on transfer
 * TransferDomain/TransferPollDomain fully implemented
 * Added german umlauts fix
+* Changed german umlauts to umlauts and added all special characters
 
 FIXED
 
