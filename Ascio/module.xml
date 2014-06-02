@@ -157,6 +157,17 @@
 		<min_days>365</min_days>
 	</define>
 
+        <define name="ie_domain_renewal">
+                <min_period>1</min_period>
+                <max_period>10</max_period>
+                <notifications>
+                        <period>50</period>
+                        <period>40</period>
+			<period>36</period>
+                </notifications>
+                <min_days>365</min_days>
+        </define>
+
 	<define name="registrant_fields">
 		<field iseditable="1" description="Full name" type="text" name="Name" required="1" minlength="1" maxlength="255" note="can cause additional costs due owner_change" />
 		<field iseditable="1" description="Organization" type="text" name="OrgName" required="0" minlength="1" maxlength="60" note="can cause additional costs due owner_change" />
@@ -222,7 +233,7 @@
 
 	<define name="contact_targets">
 		<target_group name="all">
-			<target tlds="asia,biz,com,info,mobi,name,net,org,cc,cn,nu,tv,tw,bz,tm,ws,vg,la,ms,tc,uk,in,nu,ac,at,be,ca,de,es,com.es,nom.es,org.es,eu,gs,io,it,jp,nl,nz,sh,us,kids.us,br.com,cn.com,de.com,eu.com,hu.com,no.com,qc.com,ru.com,sa.com,se.com,uk.com,us.com,uy.com,za.com,uk.net,se.net,com.mx,pro,aaa.pro,aca.pro,cpa.pro,acct.pro,eng.pro,avocat.pro,bar.pro,law.pro,jur.pro,recht.pro,med.pro,tel,cm,co,me" />
+			<target tlds="asia,biz,com,info,mobi,name,net,org,cc,cn,nu,tv,tw,bz,tm,ws,vg,la,ms,tc,uk,in,nu,ac,at,be,ca,de,es,com.es,nom.es,org.es,eu,gs,io,ie,it,jp,nl,nz,sh,us,kids.us,br.com,cn.com,de.com,eu.com,hu.com,no.com,qc.com,ru.com,sa.com,se.com,uk.com,us.com,uy.com,za.com,uk.net,se.net,com.mx,pro,aaa.pro,aca.pro,cpa.pro,acct.pro,eng.pro,avocat.pro,bar.pro,law.pro,jur.pro,recht.pro,med.pro,tel,cm,co,me" />
 		</target_group>
 	</define>
 
@@ -1655,6 +1666,63 @@
 			<contacts extends="contacts"/>
 		</config>
 	</section>
+
+        <section tlds="ie" name=".IE">
+                <config>
+                        <domain>
+                                <registration>
+                                        <min_period>1</min_period>
+                                        <max_period>10</max_period>
+                                        <min_ns>2</min_ns>
+                                        <max_ns>0</max_ns>
+                                        <extra_fields extends="domain_registration_extra_fields">
+                                                <field type="checkbox" name="ie_agreedelete" description="I agree to the renewal terms for this domain name" required="1" value="YES"/>
+
+                                        </extra_fields>
+                                </registration>
+
+                                <renewal extends="ie_domain_renewal" />
+                                <transfer extends="domain_transfer" />
+                        </domain>
+
+                        <contact_groups>
+                                <group name="registrant" assoc_with_domain="1" title="Registrant (Any)" target-group="all">
+                                        <fields extends="registrant_fields">
+                                                <field type="select" name="RegistrantType" description="Registrant Type" required="1"  iseditable="1">
+                                                        <values>
+                                                                <value name="Personal Name" value="1"/>
+                                                                <value name="Personal Trading Name" value="2"/>
+                                                                <value name="Corporate Name" value="3"/>
+                                                                <value name="Registered Trade Mark Name" value="4"/>
+                                                                <value name="Registered Business Name" value="5"/>
+                                                                <value name="State Agency Name" value="6"/>
+                                                                <value name="Publication Name" value="7"/>
+								<value name="School/Educational Institution Name" value="8"/>
+								<value name="Politician's Name" value="9"/>
+								<value name="Unincorporated Association Name" value="10"/>
+								<value name="Discretionary Name" value="11"/>
+                                                        </values>
+                                                </field>
+                                        </fields>
+                                        <disclose />
+                                        <display_fields extends="registrant_display_fields" />
+                                        <extra_fields />
+                                </group>
+                                <group name="contact" assoc_with_domain="0" title="Contact (Any)" target-group="all">
+                                        <fields extends="contact_fields">
+
+                                        </fields>
+                                        <disclose />
+                                        <display_fields extends="contact_display_fields" />
+                                        <extra_fields />
+                                </group>
+                        </contact_groups>
+
+                        <contact_target_groups extends="contact_targets" />
+
+                        <contacts extends="contacts"/>
+                </config>
+        </section>
 
 	<section tlds="it" name=".IT">
 		<config>
