@@ -466,12 +466,13 @@
                                 'Comments' => 'EPP-DRS Contact Update Order',
                                 'Domain' => array(
                                 'DomainName' => $this->MakeNameIDNCompatible($domain->Name.'.'.$domain->Extension),
-                                'Registrant' =>  array('Handle' => $contact_list[CONTACT_TYPE::REGISTRANT]->CLID),
-                                'AdminContact' => array('Handle' => $contact_list[CONTACT_TYPE::ADMIN]->CLID),
-                                'TechContact' => array('Handle' => $contact_list[CONTACT_TYPE::TECH]->CLID),
-                                'BillingContact' => array('Handle' => $contact_list[CONTACT_TYPE::BILLING]->CLID),
+                                //'Registrant' =>  array('Handle' => $contact_list[CONTACT_TYPE::REGISTRANT]->CLID),
+                                //'AdminContact' => array('Handle' => $contact_list[CONTACT_TYPE::ADMIN]->CLID),
+                                //'TechContact' => array('Handle' => $contact_list[CONTACT_TYPE::TECH]->CLID),
+                                //'BillingContact' => array('Handle' => $contact_list[CONTACT_TYPE::BILLING]->CLID),
 				'Trademark' =>  array('Country' => $contact_list[CONTACT_TYPE::REGISTRANT]->ExtraStoredData['Trademark']),
                                 )));
+
 
                          switch($contactType)
                         {
