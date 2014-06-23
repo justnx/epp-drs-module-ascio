@@ -765,7 +765,7 @@
                                         </fields>
                                         <extra_fields>
                                                 <if field="type" value="O">
-                                                        <field iseditable="1" description="Full name" type="text" name="OrgName" required="1" minlength="3" maxlength="255" />
+                                                        <field iseditable="1" description="Company Full name" type="text" name="OrgName" required="1" minlength="3" maxlength="255" />
                                                         <field iseditable="0" description="Company status" type="select" name="RegistrantType" required="1" minlength="3" maxlength="255">
                                                           <values>
                                                                 <value name="Company" value="company" />
@@ -822,7 +822,7 @@
                                         </fields>
                                         <extra_fields>
                                                 <if field="type" value="O">
-                                                        <field iseditable="1" description="Full name" type="text" name="OrgName" required="1" minlength="3" maxlength="255" />
+                                                        <field iseditable="1" description="Company Full name" type="text" name="OrgName" required="1" minlength="3" maxlength="255" />
                                                         <field iseditable="0" description="Company status" type="select" name="RegistrantType" required="1" minlength="3" maxlength="255">
                                                           <values>
                                                                 <value name="Company" value="company" />
@@ -863,6 +863,7 @@
                                 <contact group="registrant" required="1" type="registrant" name="Registrant" new_id="%d8" />
                                 <contact group="contact" required="1" type="tech" name="Technical" new_id="%d8" />
                                 <contact group="contact" required="1" type="admin" name="Administrative" new_id="%d8" />
+                                <contact group="contact" required="1" type="billing" name="Billing" new_id="%d8" />
                         </contacts>
                 </config>
         </section>
