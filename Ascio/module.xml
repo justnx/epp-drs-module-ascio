@@ -233,7 +233,7 @@
 
 	<define name="contact_targets">
 		<target_group name="all">
-			<target tlds="asia,biz,com,info,mobi,name,net,org,cc,cn,nu,tv,tw,bz,tm,ws,vg,la,ms,tc,uk,in,nu,ac,at,be,ca,de,es,com.es,nom.es,org.es,eu,gs,io,ie,it,jp,nl,nz,sh,us,kids.us,br.com,cn.com,de.com,eu.com,hu.com,no.com,qc.com,ru.com,sa.com,se.com,uk.com,us.com,uy.com,za.com,uk.net,se.net,com.mx,pro,aaa.pro,aca.pro,cpa.pro,acct.pro,eng.pro,avocat.pro,bar.pro,law.pro,jur.pro,recht.pro,med.pro,tel,cm,co,me" />
+			<target tlds="asia,biz,com,info,mobi,name,net,org,cc,cn,nu,tv,tw,bz,tm,ws,vg,la,ms,tc,uk,in,nu,ac,at,be,ca,de,es,com.es,nom.es,org.es,eu,gs,io,ie,it,jp,nl,nz,sh,us,kids.us,br.com,cn.com,de.com,eu.com,hu.com,no.com,qc.com,ru.com,sa.com,se.com,uk.com,us.com,uy.com,za.com,uk.net,se.net,com.mx,pro,aaa.pro,aca.pro,cpa.pro,acct.pro,eng.pro,avocat.pro,bar.pro,law.pro,jur.pro,recht.pro,med.pro,tel,cm,co,me,kz" />
 		</target_group>
 	</define>
 
@@ -981,7 +981,7 @@
 	</section>
 	
 	
-	<section tlds="biz,com,info,mobi,name,net,org,cc,cn,nu,tv,tw,pro,aaa.pro,aca.pro,cpa.pro,acct.pro,eng.pro,avocat.pro,bar.pro,law.pro,jur.pro,recht.pro,med.pro,tel,me" name=".BIZ, .COM, .NET">
+	<section tlds="biz,com,info,mobi,name,net,org,cc,cn,nu,tv,tw,pro,aaa.pro,aca.pro,cpa.pro,acct.pro,eng.pro,avocat.pro,bar.pro,law.pro,jur.pro,recht.pro,med.pro,tel,me,kz" name=".BIZ, .COM, .NET">
 		<ability>
 		<change_domain_authcode>0</change_domain_authcode>
 		<domain_lock>1</domain_lock>
