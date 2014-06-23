@@ -470,7 +470,10 @@
                                 //'AdminContact' => array('Handle' => $contact_list[CONTACT_TYPE::ADMIN]->CLID),
                                 //'TechContact' => array('Handle' => $contact_list[CONTACT_TYPE::TECH]->CLID),
                                 //'BillingContact' => array('Handle' => $contact_list[CONTACT_TYPE::BILLING]->CLID),
-				'Trademark' =>  array('Country' => $contact_list[CONTACT_TYPE::REGISTRANT]->ExtraStoredData['Trademark']),
+				'Trademark' =>  array('Country' => $contact_list[CONTACT_TYPE::REGISTRANT]->ExtraStoredData['Trademark'],
+                                                      'Date' => $contact_list[CONTACT_TYPE::REGISTRANT]->ExtraStoredData['TrademarkDate'],
+                                                      'Name' => $contact_list[CONTACT_TYPE::REGISTRANT]->ExtraStoredData['TrademarkName'],
+                                                      'Number' => $contact_list[CONTACT_TYPE::REGISTRANT]->ExtraStoredData['TrademarkNum'])
                                 )));
 
 
@@ -665,7 +668,10 @@
 				'TechContact' => array('Handle' => $contact_list[CONTACT_TYPE::TECH]->CLID),
 				'BillingContact' => array('Handle' => $contact_list[CONTACT_TYPE::BILLING]->CLID),
 				'AuthInfo' => $extra['pw'],
-				'Trademark' =>  array('Country' => $contact_list[CONTACT_TYPE::REGISTRANT]->ExtraStoredData['Trademark'])
+                                'Trademark' =>  array('Country' => $contact_list[CONTACT_TYPE::REGISTRANT]->ExtraStoredData['Trademark'],
+                                                      'Date' => $contact_list[CONTACT_TYPE::REGISTRANT]->ExtraStoredData['TrademarkDate'],
+                                                      'Name' => $contact_list[CONTACT_TYPE::REGISTRANT]->ExtraStoredData['TrademarkName'],
+                                                      'Number' => $contact_list[CONTACT_TYPE::REGISTRANT]->ExtraStoredData['TrademarkNum'])
 			)));
 
                         // NS
