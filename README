@@ -44,6 +44,7 @@ FIXED
 * Order comments fixes
 * ES TLD form updated
 * Fetch create date field on remote sync
+* Small TLD .FR display_fields fix
 
 TODO
 

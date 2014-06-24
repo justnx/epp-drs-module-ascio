@@ -792,10 +792,11 @@
 
                                         <display_fields>
                                                 <name>
-                                                        <field name="name" />
+                                                        <field name="Name" />
+                                                        <field name="OrgName" />
                                                 </name>
                                                 <email>
-                                                        <field name="email" />
+                                                        <field name="Email" />
                                                 </email>
                                         </display_fields>
                                 </group>
@@ -850,10 +851,12 @@
 
                                         <display_fields>
                                                 <name>
-                                                        <field name="name" />
+                                                        <field name="FirstName" />
+                                                        <field name="LastName" />
+                                                        <field name="OrgName" />
                                                 </name>
                                                 <email>
-                                                        <field name="email" />
+                                                        <field name="Email" />
                                                 </email>
                                         </display_fields>
                                 </group>
