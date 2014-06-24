@@ -598,7 +598,7 @@
 
 
                         $params = array( 'order' => array(
-                                'Type' => 'Delete_Domain',
+                                'Type' => 'Expire_Domain',
                                 'Comments' => 'EPP-DRS Delete Order',
                                 'Domain' => array(
                                 'DomainName' => $this->MakeNameIDNCompatible($domain->Name.'.'.$domain->Extension)

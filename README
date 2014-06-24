@@ -45,6 +45,7 @@ FIXED
 * ES TLD form updated
 * Fetch create date field on remote sync
 * Small TLD .FR display_fields fix
+* Changed Delete_Domain -> Expire_Domain
 
 TODO
 

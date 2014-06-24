@@ -689,7 +689,7 @@
 			<domain_lock>1</domain_lock>
 			<poll_messages>1</poll_messages>
 			<recall_application>0</recall_application>
-			<auto_renewal>0</auto_renewal>
+			<auto_renewal>1</auto_renewal>
 			<scheduled_delete>0</scheduled_delete>
 			<trade>0</trade>
 			<update_contact>1</update_contact>
