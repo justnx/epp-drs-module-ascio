@@ -702,6 +702,9 @@
 	</registry_options>
 
         <section name="*.FR, *.COM.FR" tlds="fr,re,com.fr,tm.fr,asso.fr,nom.fr,prd.fr,presse.fr,gouv.fr,com.re,nom.re,asso.re">
+                <ability>
+                        <auto_renewal>1</auto_renewal>
+                </ability>
                 <config>
                         <domain>
                                 <registration>
@@ -872,6 +875,9 @@
         </section>
 
 	<section tlds="asia" name=".ASIA">
+                <ability>
+                        <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -1153,6 +1159,7 @@
 	
 	<section tlds="biz,com,info,mobi,name,net,org,cc,cn,nu,tv,tw,pro,aaa.pro,aca.pro,cpa.pro,acct.pro,eng.pro,avocat.pro,bar.pro,law.pro,jur.pro,recht.pro,med.pro,tel,me,kz" name=".BIZ, .COM, .NET">
 		<ability>
+                <auto_renewal>1</auto_renewal>
 		<change_domain_authcode>0</change_domain_authcode>
 		<domain_lock>1</domain_lock>
 		</ability>
@@ -1193,6 +1200,9 @@
 	</section>
 
 	<section tlds="bz,tm,ws" name=".BZ, .TM, .WS">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -1229,6 +1239,9 @@
 	</section>
 
 	<section tlds="vg,la,ms,tc" name=".VG, .LA, .MS">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -1265,6 +1278,9 @@
 	</section>
 
 	<section tlds="uk" name=".UK">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -1301,6 +1317,9 @@
 	</section>
 	
 	<section tlds="in,cm,co" name=".IN, .CM, .CO">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -1337,6 +1356,9 @@
 	</section>
 
 	<section tlds="nu" name=".NU">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -1373,6 +1395,9 @@
 	</section>
 
 	<section tlds="ac" name=".AC">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -1411,6 +1436,9 @@
 	</section>
 
 	<section tlds="at" name=".AT">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -1450,7 +1478,7 @@
 
 	<section tlds="be" name=".BE">
 		<ability>
-			<auto_renewal>1</auto_renewal>		
+			<auto_renewal>1</auto_renewal>
 		</ability>
 		<config>
 			<domain>
@@ -1490,6 +1518,9 @@
 	</section>
 	
 	<section tlds="ca" name=".CA">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -1626,6 +1657,9 @@
 	</section>
 
 	<section tlds="es,com.es,nom.es,org.es" name=".ES">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -1762,6 +1796,9 @@
 	</section>
 	
 	<section tlds="gs" name=".GS">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -1800,6 +1837,9 @@
 	</section>
 
 	<section tlds="io" name=".IO">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -1838,6 +1878,9 @@
 	</section>
 
         <section tlds="ie" name=".IE">
+                <ability>
+                        <auto_renewal>1</auto_renewal>
+                </ability>
                 <config>
                         <domain>
                                 <registration>
@@ -1895,6 +1938,9 @@
         </section>
 
 	<section tlds="it" name=".IT">
+                <ability>
+                        <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -1963,6 +2009,9 @@
 	</section>
 
 	<section tlds="jp" name=".JP">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -2052,6 +2101,9 @@
 	</section>
 
 	<section tlds="nl" name=".NL">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -2090,6 +2142,9 @@
 	</section>
 
 	<section tlds="nz" name=".NZ">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -2128,6 +2183,9 @@
 	</section>
 	
 	<section tlds="sh" name=".SH">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -2166,6 +2224,9 @@
 	</section>
 
 	<section tlds="us" name=".US">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -2234,6 +2295,9 @@ a-zA-Z0-9\-\.]+$/" />
 	</section>
 
 	<section tlds="kids.us" name=".KIDS.US">
+                <ability>
+                <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -2302,6 +2366,9 @@ a-zA-Z0-9\-\.]+$/" />
 	</section>
 
 	<section name="*.COM, *.NET" tlds="br.com,cn.com,de.com,eu.com,hu.com,no.com,qc.com,ru.com,sa.com,se.com,uk.com,us.com,uy.com,za.com,uk.net,se.net">
+                <ability>
+                        <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
@@ -2338,6 +2405,9 @@ a-zA-Z0-9\-\.]+$/" />
 	</section>
 
 	<section tlds="com.mx">
+                <ability>
+                        <auto_renewal>1</auto_renewal>
+                </ability>
 		<config>
 			<domain>
 				<registration>
